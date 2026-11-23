@@ -1,0 +1,2122 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hazwan Fahmi Ghailan — Watatsumi Portfolio</title>
+  <meta name="description" content="Portofolio personal Hazwan Fahmi Ghailan — Mahasiswa Teknik Informatika & Developer bernuansa Watatsumi Island." />
+
+  <!-- Inline SVG Favicon (Pearl & Wave Crest) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3CradialGradient id='g' cx='35%25' cy='35%25' r='65%25'%3E%3Cstop offset='0%25' stop-color='%23f0f8ff'/%3E%3Cstop offset='50%25' stop-color='%2364e8ff'/%3E%3Cstop offset='100%25' stop-color='%23ff8ec4'/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='18' fill='%23060d24'/%3E%3Ccircle cx='32' cy='28' r='14' fill='url(%23g)'/%3E%3Cpath d='M16 46 Q32 55 48 46' stroke='%2364e8ff' stroke-width='3' fill='none' stroke-linecap='round'/%3E%3C/svg%3E" />
+
+  <!-- Google Fonts: Cinzel, Plus Jakarta Sans, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Cinzel"', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            abyss: {
+              950: '#060d24',
+              900: '#0b1636',
+              800: '#11224d',
+              700: '#1a3166',
+            },
+            hydro: {
+              DEFAULT: '#64e8ff',
+              bright: '#a6f4ff',
+            },
+            coral: {
+              DEFAULT: '#ffb7d5',
+              deep: '#ff8ec4',
+            },
+            lavender: '#c4b5fd',
+            pearl: '#f0f8ff',
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    /* ==========================================================================
+       WATATSUMI ISLAND / SANGONOMIYA KOKOMI — THEME TOKENS & ATMOSPHERE
+       ========================================================================== */
+    :root {
+      --abyss-deep: #060d24;
+      --abyss-mid: #0b1636;
+      --hydro: #64e8ff;
+      --coral: #ffb7d5;
+      --coral-deep: #ff8ec4;
+      --lavender: #c4b5fd;
+      --pearl: #f0f8ff;
+      --glass-bg: rgba(11, 22, 54, 0.54);
+      --glass-bg-hover: rgba(17, 34, 77, 0.68);
+      --glass-border: rgba(100, 232, 255, 0.2);
+      --glass-border-hover: rgba(255, 183, 213, 0.5);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      background-color: var(--abyss-deep);
+      color: var(--pearl);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Deep Abyssal Indigo & Bioluminescent Backdrop */
+    body {
+      background:
+        radial-gradient(ellipse 85% 45% at 50% -8%, rgba(100, 232, 255, 0.16), transparent 65%),
+        radial-gradient(ellipse 55% 45% at 88% 22%, rgba(255, 142, 196, 0.12), transparent 60%),
+        radial-gradient(ellipse 60% 45% at 12% 68%, rgba(196, 181, 253, 0.11), transparent 60%),
+        linear-gradient(180deg, #060d24 0%, #0b1636 42%, #102047 76%, #071029 100%);
+      background-attachment: fixed;
+      min-height: 100vh;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #060d24;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, #64e8ff, #c4b5fd, #ff8ec4);
+      border-radius: 999px;
+    }
+
+    /* Full-Screen Canvas Layer */
+    #watatsumi-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .content-layer {
+      position: relative;
+      z-index: 10;
+    }
+
+    /* Iridescent Gradient Text */
+    .text-watatsumi {
+      background: linear-gradient(120deg, #f0f8ff 0%, #64e8ff 38%, #ffb7d5 72%, #c4b5fd 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Glassmorphic Pearl Card */
+    .pearl-glass {
+      background: var(--glass-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border);
+      box-shadow:
+        0 12px 36px -10px rgba(4, 9, 26, 0.72),
+        inset 0 1px 0 rgba(240, 248, 255, 0.14);
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                  border-color 0.35s ease,
+                  box-shadow 0.35s ease,
+                  background-color 0.35s ease;
+    }
+
+    .pearl-glass:hover {
+      background: var(--glass-bg-hover);
+      border-color: var(--glass-border-hover);
+      box-shadow:
+        0 18px 46px -12px rgba(4, 9, 26, 0.85),
+        0 0 26px -6px rgba(100, 232, 255, 0.24),
+        0 0 18px -6px rgba(255, 142, 196, 0.2),
+        inset 0 1px 0 rgba(240, 248, 255, 0.22);
+    }
+
+    /* Floating Glassmorphic Header */
+    .floating-header {
+      background: rgba(6, 13, 36, 0.68);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(100, 232, 255, 0.24);
+      box-shadow:
+        0 12px 30px rgba(3, 7, 22, 0.6),
+        inset 0 1px 0 rgba(240, 248, 255, 0.16);
+      transition: all 0.3s ease;
+    }
+
+    .floating-header.scrolled {
+      background: rgba(6, 13, 36, 0.86);
+      border-color: rgba(100, 232, 255, 0.36);
+      box-shadow:
+        0 16px 38px rgba(3, 7, 22, 0.78),
+        0 0 24px rgba(100, 232, 255, 0.14);
+    }
+
+    .nav-link {
+      position: relative;
+      color: rgba(240, 248, 255, 0.78);
+      transition: color 0.25s ease;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: #f0f8ff;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: -4px;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #64e8ff, #ff8ec4);
+      border-radius: 999px;
+      transform: translateX(-50%);
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover::after,
+    .nav-link.active::after {
+      width: 72%;
+    }
+
+    /* Luminous Iridescent Pearl-Coral Avatar Halo (192px circle) */
+    .avatar-halo-ring {
+      position: relative;
+      width: 196px;
+      height: 196px;
+      border-radius: 9999px;
+      padding: 5px;
+      background: conic-gradient(
+        from 0deg,
+        #64e8ff,
+        #c4b5fd,
+        #ffb7d5,
+        #ff8ec4,
+        #f0f8ff,
+        #64e8ff
+      );
+      box-shadow:
+        0 0 36px rgba(100, 232, 255, 0.34),
+        0 0 60px rgba(255, 142, 196, 0.22);
+      animation: haloSpin 14s linear infinite;
+    }
+
+    .avatar-inner-frame {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 9999px;
+      overflow: hidden;
+      background: radial-gradient(circle at 30% 25%, #162b5c 0%, #0b1636 60%, #060d24 100%);
+      border: 4px solid rgba(6, 13, 36, 0.92);
+      animation: haloSpinReverse 14s linear infinite;
+    }
+
+    @keyframes haloSpin {
+      to { transform: rotate(360deg); }
+    }
+    @keyframes haloSpinReverse {
+      to { transform: rotate(-360deg); }
+    }
+
+    /* Floating Hydro Pearl Orbs */
+    .hydro-orb {
+      position: absolute;
+      border-radius: 9999px;
+      pointer-events: none;
+      animation: orbFloat 5s ease-in-out infinite;
+    }
+
+    @keyframes orbFloat {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-10px) scale(1.08); }
+    }
+
+    /* Primary & Outline Hydro Buttons */
+    .btn-hydro {
+      background: linear-gradient(135deg, rgba(100, 232, 255, 0.24), rgba(196, 181, 253, 0.24), rgba(255, 142, 196, 0.26));
+      border: 1px solid rgba(100, 232, 255, 0.5);
+      color: #f0f8ff;
+      box-shadow: 0 8px 26px -6px rgba(100, 232, 255, 0.38);
+      transition: all 0.28s ease;
+    }
+
+    .btn-hydro:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255, 183, 213, 0.8);
+      box-shadow: 0 12px 32px -6px rgba(100, 232, 255, 0.52), 0 0 22px rgba(255, 142, 196, 0.3);
+    }
+
+    .btn-pearl-outline {
+      background: rgba(11, 22, 54, 0.55);
+      border: 1px solid rgba(240, 248, 255, 0.25);
+      color: #f0f8ff;
+      transition: all 0.28s ease;
+    }
+
+    .btn-pearl-outline:hover {
+      transform: translateY(-2px);
+      background: rgba(17, 34, 77, 0.72);
+      border-color: rgba(100, 232, 255, 0.55);
+    }
+
+    /* Right-Side Fixed Vertical Section Progress Tracker (Desktop) */
+    .section-progress {
+      position: fixed;
+      right: 1.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 40;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    @media (min-width: 1024px) {
+      .section-progress {
+        display: flex;
+      }
+    }
+
+    .progress-track-line {
+      position: absolute;
+      top: 8px;
+      bottom: 8px;
+      width: 2px;
+      background: linear-gradient(180deg, rgba(100, 232, 255, 0.2), rgba(196, 181, 253, 0.4), rgba(255, 142, 196, 0.25));
+      border-radius: 999px;
+      z-index: -1;
+    }
+
+    .progress-dot-btn {
+      position: relative;
+      width: 14px;
+      height: 14px;
+      border-radius: 9999px;
+      background: rgba(6, 13, 36, 0.88);
+      border: 2px solid rgba(100, 232, 255, 0.48);
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+      padding: 0;
+    }
+
+    .progress-dot-btn:hover {
+      transform: scale(1.25);
+      border-color: #ffb7d5;
+    }
+
+    .progress-dot-btn.active {
+      background: radial-gradient(circle at 35% 35%, #ffffff, #64e8ff 58%, #ff8ec4);
+      border-color: #f0f8ff;
+      transform: scale(1.38);
+      box-shadow: 0 0 14px rgba(100, 232, 255, 0.9), 0 0 24px rgba(255, 142, 196, 0.5);
+    }
+
+    .progress-tooltip {
+      position: absolute;
+      right: 26px;
+      top: 50%;
+      transform: translateY(-50%) translateX(6px);
+      opacity: 0;
+      pointer-events: none;
+      white-space: nowrap;
+      padding: 4px 11px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: #f0f8ff;
+      background: rgba(6, 13, 36, 0.92);
+      border: 1px solid rgba(100, 232, 255, 0.32);
+      backdrop-filter: blur(8px);
+      transition: all 0.25s ease;
+    }
+
+    .progress-dot-btn:hover .progress-tooltip {
+      opacity: 1;
+      transform: translateY(-50%) translateX(0);
+    }
+
+    /* Scroll Reveal for Below-the-Fold Sections ONLY (Hero is always immediately visible) */
+    .reveal-section {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .reveal-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Smooth Language Switch Fade */
+    .i18n-fade {
+      transition: opacity 0.2s ease;
+    }
+    .i18n-fading {
+      opacity: 0 !important;
+    }
+
+    /* Bubble-Click Burst Particles & Ripple */
+    .hydro-ripple {
+      position: fixed;
+      border-radius: 9999px;
+      pointer-events: none;
+      z-index: 9998;
+      border: 1.5px solid rgba(100, 232, 255, 0.78);
+      box-shadow: 0 0 12px rgba(100, 232, 255, 0.5);
+      transform: translate(-50%, -50%) scale(0.2);
+      animation: rippleExpand 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes rippleExpand {
+      0% { width: 12px; height: 12px; opacity: 0.9; transform: translate(-50%, -50%) scale(0.4); }
+      100% { width: 74px; height: 74px; opacity: 0; transform: translate(-50%, -50%) scale(1.25); }
+    }
+
+    .click-bubble {
+      position: fixed;
+      border-radius: 9999px;
+      pointer-events: none;
+      z-index: 9999;
+      background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.95), rgba(100, 232, 255, 0.48) 55%, rgba(255, 142, 196, 0.3) 100%);
+      border: 1px solid rgba(240, 248, 255, 0.7);
+      box-shadow: 0 0 8px rgba(100, 232, 255, 0.52);
+      animation: bubbleBurst 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes bubbleBurst {
+      0% { opacity: 0.95; transform: translate(-50%, -50%) translate(0, 0) scale(0.5); }
+      70% { opacity: 0.85; }
+      100% { opacity: 0; transform: translate(-50%, -50%) translate(var(--tx), var(--ty)) scale(1.15); }
+    }
+
+    /* Toast Notification */
+    #toast-box {
+      position: fixed;
+      bottom: 1.75rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      opacity: 0;
+      pointer-events: none;
+      z-index: 100;
+      transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    #toast-box.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* Project Detail Modal */
+    #project-modal {
+      transition: opacity 0.25s ease, visibility 0.25s ease;
+    }
+    #project-modal.modal-hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    #project-modal.modal-visible {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .avatar-halo-ring, .avatar-inner-frame, .hydro-orb {
+        animation: none !important;
+      }
+      .reveal-section {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+      html { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+<body class="selection:bg-hydro/30 selection:text-pearl">
+
+  <!-- Full-Screen 60fps Watatsumi Underwater Canvas -->
+  <canvas id="watatsumi-canvas" aria-hidden="true"></canvas>
+
+  <!-- ========================================================================
+       FLOATING GLASSMORPHIC TOP HEADER & MOBILE DRAWER
+       ======================================================================== -->
+  <header class="fixed top-4 left-0 right-0 z-50 px-4">
+    <nav id="floating-nav" class="floating-header max-w-4xl mx-auto rounded-full px-4 sm:px-6 py-2.5 flex items-center justify-between gap-3">
+      <!-- Brand Emblem -->
+      <a href="#home" class="flex items-center gap-2.5 group focus:outline-none">
+        <span class="w-9 h-9 rounded-full bg-abyss-900/90 border border-hydro/45 flex items-center justify-center shadow-[0_0_15px_rgba(100,232,255,0.28)] group-hover:border-coral/70 transition-colors">
+          <svg class="w-5 h-5" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+            <defs>
+              <radialGradient id="brandPearl" cx="35%" cy="35%" r="65%">
+                <stop offset="0%" stop-color="#f0f8ff" />
+                <stop offset="55%" stop-color="#64e8ff" />
+                <stop offset="100%" stop-color="#ff8ec4" />
+              </radialGradient>
+            </defs>
+            <circle cx="16" cy="13" r="6.2" fill="url(#brandPearl)" />
+            <path d="M5 21.5C9 25 13 25 16 22.5C19 25 23 25 27 21.5" stroke="#64e8ff" stroke-width="2" stroke-linecap="round" />
+            <path d="M9 26C12 28 20 28 23 26" stroke="#ffb7d5" stroke-width="1.6" stroke-linecap="round" opacity="0.88" />
+          </svg>
+        </span>
+        <span class="font-serif font-bold tracking-widest text-sm sm:text-base text-pearl group-hover:text-hydro transition-colors">
+          HFG
+        </span>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <ul class="hidden md:flex items-center gap-7 text-sm font-medium">
+        <li><a href="#home" class="nav-link active i18n-fade" data-i18n="nav.home">Beranda</a></li>
+        <li><a href="#about" class="nav-link i18n-fade" data-i18n="nav.about">Tentang</a></li>
+        <li><a href="#projects" class="nav-link i18n-fade" data-i18n="nav.projects">Proyek</a></li>
+        <li><a href="#contact" class="nav-link i18n-fade" data-i18n="nav.contact">Kontak</a></li>
+      </ul>
+
+      <!-- Right Controls: Language Pill Toggle & Mobile Menu -->
+      <div class="flex items-center gap-2.5">
+        <button
+          id="lang-toggle"
+          type="button"
+          aria-label="Toggle Language ID / EN"
+          class="flex items-center bg-abyss-950/80 border border-hydro/35 rounded-full p-1 text-xs font-mono font-medium cursor-pointer hover:border-coral/60 transition-colors"
+        >
+          <span id="lang-id-pill" class="px-2.5 py-1 rounded-full transition-all duration-300 bg-gradient-to-r from-hydro/35 to-coral-deep/35 text-pearl shadow-sm">ID</span>
+          <span id="lang-en-pill" class="px-2.5 py-1 rounded-full transition-all duration-300 text-pearl/60">EN</span>
+        </button>
+
+        <button
+          id="mobile-menu-btn"
+          type="button"
+          aria-label="Open Navigation Menu"
+          aria-expanded="false"
+          class="md:hidden w-9 h-9 rounded-full bg-abyss-900/75 border border-hydro/35 flex items-center justify-center text-pearl hover:border-coral/60 transition-colors"
+        >
+          <svg id="hamburger-icon" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+          <svg id="close-icon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile Dropdown Drawer -->
+    <div id="mobile-drawer" class="md:hidden max-w-4xl mx-auto mt-2.5 rounded-3xl pearl-glass p-4 hidden">
+      <ul class="flex flex-col gap-1.5 text-sm font-medium">
+        <li><a href="#home" class="mobile-nav-link block px-4 py-3 rounded-2xl hover:bg-hydro/10 text-pearl i18n-fade" data-i18n="nav.home">Beranda</a></li>
+        <li><a href="#about" class="mobile-nav-link block px-4 py-3 rounded-2xl hover:bg-hydro/10 text-pearl/90 i18n-fade" data-i18n="nav.about">Tentang</a></li>
+        <li><a href="#projects" class="mobile-nav-link block px-4 py-3 rounded-2xl hover:bg-hydro/10 text-pearl/90 i18n-fade" data-i18n="nav.projects">Proyek</a></li>
+        <li><a href="#contact" class="mobile-nav-link block px-4 py-3 rounded-2xl hover:bg-hydro/10 text-pearl/90 i18n-fade" data-i18n="nav.contact">Kontak</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       RIGHT-SIDE FIXED SECTION PROGRESS TRACKER (DESKTOP)
+       ======================================================================== -->
+  <aside class="section-progress" aria-label="Section Progress">
+    <div class="progress-track-line"></div>
+    <button type="button" class="progress-dot-btn active" data-target="home" aria-label="Home">
+      <span class="progress-tooltip i18n-fade" data-i18n="nav.home">Beranda</span>
+    </button>
+    <button type="button" class="progress-dot-btn" data-target="about" aria-label="About">
+      <span class="progress-tooltip i18n-fade" data-i18n="nav.about">Tentang</span>
+    </button>
+    <button type="button" class="progress-dot-btn" data-target="projects" aria-label="Projects">
+      <span class="progress-tooltip i18n-fade" data-i18n="nav.projects">Proyek</span>
+    </button>
+    <button type="button" class="progress-dot-btn" data-target="contact" aria-label="Contact">
+      <span class="progress-tooltip i18n-fade" data-i18n="nav.contact">Kontak</span>
+    </button>
+  </aside>
+
+  <!-- ========================================================================
+       MAIN CONTENT
+       ======================================================================== -->
+  <main class="content-layer">
+
+    <!-- ======================================================================
+         1. HERO SECTION — IMMEDIATELY VISIBLE AT TOP (NO OPACITY:0 DELAY)
+         ====================================================================== -->
+    <section id="home" class="pt-28 sm:pt-32 pb-16 sm:pb-24 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-5xl mx-auto">
+        <div class="pearl-glass rounded-[2rem] p-7 sm:p-11 lg:p-12 relative overflow-hidden">
+          <!-- Soft Underwater Ambient Glows -->
+          <div class="absolute -top-20 -left-20 w-64 h-64 rounded-full bg-hydro/15 blur-3xl pointer-events-none"></div>
+          <div class="absolute -bottom-24 -right-20 w-72 h-72 rounded-full bg-coral-deep/15 blur-3xl pointer-events-none"></div>
+
+          <div class="relative z-10 flex flex-col lg:flex-row items-center gap-10 lg:gap-12">
+
+            <!-- AVATAR COLUMN (Iridescent Pearl-Coral Halo + Interactive Upload & Fallback) -->
+            <div class="shrink-0 flex flex-col items-center">
+              <div class="relative flex items-center justify-center">
+                <!-- Decorative Floating Hydro Orbs -->
+                <span class="hydro-orb w-4 h-4 -top-2 right-4 bg-gradient-to-br from-pearl to-hydro shadow-[0_0_14px_#64e8ff]" style="animation-delay: 0s;"></span>
+                <span class="hydro-orb w-3 h-3 bottom-5 -left-2 bg-gradient-to-br from-pearl to-coral-deep shadow-[0_0_12px_#ff8ec4]" style="animation-delay: 1.5s;"></span>
+                <span class="hydro-orb w-3.5 h-3.5 top-10 -left-3 bg-gradient-to-br from-pearl to-lavender shadow-[0_0_12px_#c4b5fd]" style="animation-delay: 2.4s;"></span>
+
+                <!-- Luminous Pearl-Coral Halo Ring (196px) -->
+                <div class="avatar-halo-ring group">
+                  <div class="avatar-inner-frame">
+                    <!-- Profile Photo (loads local image_3270e6.jpg or saved preview) -->
+                    <img
+                      id="profile-img"
+                      src="image_3270e6.jpg"
+                      alt="Hazwan Fahmi Ghailan"
+                      style="object-fit: cover; object-position: center;"
+                      class="w-full h-full block transition-transform duration-500 group-hover:scale-105"
+                    />
+
+                    <!-- Graceful Watatsumi Pearl & Jellyfish Monogram Fallback (Never Blank!) -->
+                    <div
+                      id="avatar-fallback"
+                      class="hidden absolute inset-0 flex flex-col items-center justify-center p-4 text-center select-none"
+                    >
+                      <svg class="w-24 h-24 mb-1 drop-shadow-[0_0_14px_rgba(100,232,255,0.45)]" viewBox="0 0 120 120" fill="none" aria-hidden="true">
+                        <defs>
+                          <radialGradient id="pearlCore" cx="35%" cy="30%" r="68%">
+                            <stop offset="0%" stop-color="#f0f8ff" />
+                            <stop offset="48%" stop-color="#64e8ff" />
+                            <stop offset="100%" stop-color="#ff8ec4" />
+                          </radialGradient>
+                          <linearGradient id="jellyRim" x1="25" y1="20" x2="95" y2="95" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#64e8ff" />
+                            <stop offset="0.5" stop-color="#c4b5fd" />
+                            <stop offset="1" stop-color="#ffb7d5" />
+                          </linearGradient>
+                        </defs>
+                        <!-- Translucent Bake-Kurage Bell -->
+                        <path d="M26 56C26 35 41 20 60 20C79 20 94 35 94 56C86 62 76 58 68 62C62 65 58 65 52 62C44 58 34 62 26 56Z" fill="rgba(100,232,255,0.16)" stroke="url(#jellyRim)" stroke-width="2.2" />
+                        <!-- Luminous Pearl Center -->
+                        <circle cx="60" cy="45" r="14" fill="url(#pearlCore)" opacity="0.92" />
+                        <!-- Flowing Tentacles -->
+                        <path d="M40 62C37 74 44 82 40 96" stroke="#64e8ff" stroke-width="2" stroke-linecap="round" opacity="0.75" />
+                        <path d="M53 64C51 77 57 86 53 102" stroke="#c4b5fd" stroke-width="2" stroke-linecap="round" opacity="0.8" />
+                        <path d="M67 64C69 77 63 86 67 102" stroke="#ffb7d5" stroke-width="2" stroke-linecap="round" opacity="0.8" />
+                        <path d="M80 62C83 74 76 82 80 96" stroke="#64e8ff" stroke-width="2" stroke-linecap="round" opacity="0.75" />
+                      </svg>
+                      <span class="font-serif text-lg font-bold tracking-[0.22em] text-watatsumi -mt-2">HFG</span>
+                    </div>
+
+                    <!-- Sleek Hover Camera / Upload Overlay -->
+                    <button
+                      id="avatar-upload-trigger"
+                      type="button"
+                      title="Ganti / Muat Foto Profil"
+                      class="absolute inset-0 bg-abyss-950/65 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center gap-1.5 text-pearl cursor-pointer border-0"
+                    >
+                      <span class="w-10 h-10 rounded-full bg-hydro/20 border border-hydro/55 flex items-center justify-center text-hydro-bright">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M3 9a2 2 0 012-2h2l1.5-2h7L17 7h2a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                          <circle cx="12" cy="13" r="3.5" />
+                        </svg>
+                      </span>
+                      <span class="text-[11px] font-mono tracking-wide px-2 text-center i18n-fade" data-i18n="hero.uploadPhoto">
+                        Muat Foto
+                      </span>
+                    </button>
+
+                    <!-- Hidden File Input -->
+                    <input
+                      id="avatar-file-input"
+                      type="file"
+                      accept="image/*"
+                      class="hidden"
+                      aria-label="Upload Profile Picture"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Subtle Hint Pill under Avatar (only shown when fallback is active) -->
+              <button
+                id="avatar-hint-btn"
+                type="button"
+                class="hidden mt-3.5 px-3.5 py-1 rounded-full bg-abyss-950/70 border border-hydro/30 hover:border-coral/60 text-[11px] font-mono text-hydro-bright transition-colors cursor-pointer inline-flex items-center gap-1.5"
+              >
+                <svg class="w-3.5 h-3.5 text-coral" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                </svg>
+                <span class="i18n-fade" data-i18n="hero.previewPhotoHint">Pilih foto lokal untuk preview</span>
+              </button>
+            </div>
+
+            <!-- INTRO TEXT COLUMN -->
+            <div class="flex-1 text-center lg:text-left">
+              <!-- Availability Pill -->
+              <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-abyss-950/65 border border-hydro/30 text-xs font-mono text-hydro-bright mb-4">
+                <span class="relative flex h-2 w-2">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-hydro opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2 w-2 bg-hydro"></span>
+                </span>
+                <span class="i18n-fade" data-i18n="hero.status">Terbuka untuk Kolaborasi</span>
+              </div>
+
+              <!-- Full Name -->
+              <h1 class="font-serif text-3xl sm:text-5xl font-bold tracking-tight leading-tight mb-3">
+                <span class="text-watatsumi">Hazwan Fahmi</span>
+                <span class="text-pearl"> Ghailan</span>
+              </h1>
+
+              <!-- Grounded Role / Tagline -->
+              <p class="text-base sm:text-xl font-medium text-coral mb-4 i18n-fade" data-i18n="hero.role">
+                Mahasiswa Teknik Informatika &amp; Developer
+              </p>
+
+              <!-- Concise Description -->
+              <p class="text-sm sm:text-base text-pearl/80 leading-relaxed max-w-xl mx-auto lg:mx-0 mb-7 i18n-fade" data-i18n="hero.bio">
+                Membangun aplikasi web, alat otomasi dokumen berbasis Python, antarmuka yang bersih, serta mengeksplorasi ekosistem Linux untuk alur kerja yang efisien.
+              </p>
+
+              <!-- CTA Row -->
+              <div class="flex flex-wrap items-center justify-center lg:justify-start gap-3.5">
+                <a href="#projects" class="btn-hydro px-6 py-3 rounded-full text-sm font-semibold inline-flex items-center gap-2">
+                  <span class="i18n-fade" data-i18n="hero.ctaProjects">Lihat Proyek</span>
+                  <svg class="w-4 h-4 text-hydro-bright" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                  </svg>
+                </a>
+                <a href="#contact" class="btn-pearl-outline px-6 py-3 rounded-full text-sm font-semibold inline-flex items-center gap-2">
+                  <span class="i18n-fade" data-i18n="hero.ctaContact">Hubungi Saya</span>
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         2. ABOUT & SKILLS SECTION
+         ====================================================================== -->
+    <section id="about" class="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 reveal-section">
+      <div class="max-w-5xl mx-auto">
+        <!-- Section Header -->
+        <div class="text-center max-w-2xl mx-auto mb-12">
+          <div class="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.22em] text-hydro mb-2.5">
+            <span class="w-6 h-px bg-gradient-to-r from-transparent to-hydro"></span>
+            <span class="i18n-fade" data-i18n="about.kicker">Profil &amp; Keahlian</span>
+            <span class="w-6 h-px bg-gradient-to-l from-transparent to-coral"></span>
+          </div>
+          <h2 class="font-serif text-3xl sm:text-4xl font-bold text-pearl mb-3 i18n-fade" data-i18n="about.title">
+            Tentang Saya
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <!-- Bio Card -->
+          <div class="lg:col-span-7 pearl-glass rounded-3xl p-7 sm:p-8 flex flex-col justify-between">
+            <div>
+              <h3 class="font-serif text-xl font-semibold text-hydro-bright mb-4 i18n-fade" data-i18n="about.bioHeading">
+                Latar Belakang
+              </h3>
+              <p class="text-sm sm:text-base text-pearl/85 leading-relaxed mb-4 i18n-fade" data-i18n="about.bioP1">
+                Saya Hazwan Fahmi Ghailan, mahasiswa Teknik Informatika yang fokus pada pengembangan web, pembuatan perangkat bantu berbasis Python, desain UI yang bersih, serta oprek sistem Linux.
+              </p>
+              <p class="text-sm sm:text-base text-pearl/75 leading-relaxed i18n-fade" data-i18n="about.bioP2">
+                Saya senang membangun tools praktis yang memangkas pekerjaan manual berulang—seperti otomasi penyusunan dokumen dan konversi format tulisan akademik—sambil menjaga kode tetap rapi dan mudah dikembangkan.
+              </p>
+              <p class="text-sm sm:text-base text-pearl/75 leading-relaxed mt-4 i18n-fade" data-i18n="about.bioP3">
+                Di luar proyek, saya mengerjakan praktikum Pemrograman Web (Laravel), Basis Data Lanjut, dan Jaringan Lanjut (MikroTik), merakit desktop Linux sendiri dengan CachyOS dan Hyprland, serta menjalankan layanan self-hosted lewat Docker dan Tailscale. Saya juga berkarya sebagai kreator dengan nama chigusa.
+              </p>
+            </div>
+
+            <div class="flex flex-wrap gap-2.5 mt-6 pt-5 border-t border-hydro/15">
+              <span class="px-3.5 py-1.5 rounded-full bg-abyss-950/65 border border-hydro/25 text-xs font-mono text-hydro-bright">
+                Web Development
+              </span>
+              <span class="px-3.5 py-1.5 rounded-full bg-abyss-950/65 border border-coral/25 text-xs font-mono text-coral">
+                Python &amp; Automation
+              </span>
+              <span class="px-3.5 py-1.5 rounded-full bg-abyss-950/65 border border-lavender/25 text-xs font-mono text-lavender">
+                Linux &amp; Systems
+              </span>
+            </div>
+          </div>
+
+          <!-- Skills Glassmorphic Badges Card -->
+          <div class="lg:col-span-5 pearl-glass rounded-3xl p-7 sm:p-8 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-5">
+                <h3 class="font-serif text-xl font-semibold text-coral i18n-fade" data-i18n="about.skillsHeading">
+                  Tech Stack
+                </h3>
+                <span class="text-xs font-mono px-2.5 py-1 rounded-full bg-coral/15 border border-coral/30 text-coral">16</span>
+              </div>
+
+              <div class="flex flex-wrap gap-2.5">
+                <span class="px-3.5 py-2 rounded-2xl bg-abyss-950/60 border border-hydro/25 hover:border-hydro/60 text-xs sm:text-sm font-medium text-pearl transition-colors">HTML5</span>
+                <span class="px-3.5 py-2 rounded-2xl bg-abyss-950/60 border border-hydro/25 hover:border-hydro/60 text-xs sm:text-sm font-medium text-pearl transition-colors">CSS3</span>
+                <span class="px-3.5 py-2 rounded-2xl bg-abyss-950/60 border border-hydro/25 hover:border-hydro/60 text-xs sm:text-sm font-medium text-pearl transition-colors">JavaScript</span>
+                <span class="px-3.5 py-2 rounded-2xl bg-abyss-950/60 border border-hydro/25 hover:border-hydro/60 text-xs sm:text-sm font-medium text-pearl transition-colors">PHP</span>
+                <span class="px-3.5 py-2 rounded-2xl bg-abyss-950/60 border border-hydro/25 hover:border-hydro/60 text-xs sm:text-sm font-medium text-pearl transition-colors">Laravel</span>
+                <span class="px-3.5 py-2 rounded-2xl bg-abyss-950/60 border border-hydro/25 hover:border-hydro/60 text-xs sm:text-sm font-medium text-pearl transition-colors">MySQL</span>
+                <span class="px-3.5 py-2 rounded-2xl bg-abyss-950/60 border border-lavender/30 hover:border-lavender/65 text-xs sm:text-sm font-medium text-pearl transition-colors">Python</span>
+                <span class="px-3.5 py-2 rounded-2xl bg-abyss-950/60 border border-lavender/30 hover:border-lavender/65 text-xs sm:text-sm font-medium text-pearl transition-colors">Flask</span>
+                <span class="px-3.5 py-2 rounded-2xl bg-abyss-950/60 border border-lavender/30 hover:border-lavender/65 text-xs sm:text-sm font-medium text-pearl transition-colors">Django</span>
+                <span class="px-3.5 py-2 rounded-2xl bg-abyss-950/60 border border-lavender/30 hover:border-lavender/65 text-xs sm:text-sm font-medium text-pearl transition-colors">Node.js</span>
+                <span class="px-3.5 py-2 rounded-2xl bg-abyss-950/60 border border-lavender/30 hover:border-lavender/65 text-xs sm:text-sm font-medium text-pearl transition-colors">FastAPI</span>
+                <span class="px-3.5 py-2 rounded-2xl bg-abyss-950/60 border border-coral/25 hover:border-coral/60 text-xs sm:text-sm font-medium text-pearl transition-colors">Git &amp; GitHub</span>
+                <span class="px-3.5 py-2 rounded-2xl bg-abyss-950/60 border border-coral/25 hover:border-coral/60 text-xs sm:text-sm font-medium text-pearl transition-colors">Docker</span>
+                <span class="px-3.5 py-2 rounded-2xl bg-abyss-950/60 border border-coral/25 hover:border-coral/60 text-xs sm:text-sm font-medium text-pearl transition-colors">Linux</span>
+                <span class="px-3.5 py-2 rounded-2xl bg-abyss-950/60 border border-coral/25 hover:border-coral/60 text-xs sm:text-sm font-medium text-pearl transition-colors">QML</span>
+                <span class="px-3.5 py-2 rounded-2xl bg-abyss-950/60 border border-coral/25 hover:border-coral/60 text-xs sm:text-sm font-medium text-pearl transition-colors">MikroTik</span>
+              </div>
+            </div>
+
+            <p class="text-xs text-pearl/60 mt-6 pt-4 border-t border-coral/15 font-mono i18n-fade" data-i18n="about.skillsNote">
+              Fokus pada arsitektur bersih &amp; performa ringan.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         3. FEATURED PROJECTS SECTION (2 CURATED REPOS + MODALS)
+         ====================================================================== -->
+    <section id="projects" class="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 reveal-section">
+      <div class="max-w-5xl mx-auto">
+        <!-- Section Header -->
+        <div class="text-center max-w-2xl mx-auto mb-12">
+          <div class="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.22em] text-coral mb-2.5">
+            <span class="w-6 h-px bg-gradient-to-r from-transparent to-coral"></span>
+            <span class="i18n-fade" data-i18n="projects.kicker">Karya Pilihan</span>
+            <span class="w-6 h-px bg-gradient-to-l from-transparent to-hydro"></span>
+          </div>
+          <h2 class="font-serif text-3xl sm:text-4xl font-bold text-pearl mb-3 i18n-fade" data-i18n="projects.title">
+            Proyek Unggulan
+          </h2>
+          <p class="text-sm sm:text-base text-pearl/75 i18n-fade" data-i18n="projects.subtitle">
+            Dua proyek pilihan dari repositori GitHub saya yang berfokus pada otomasi dokumen dan efisiensi penulisan akademik.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-7">
+
+          <!-- PROJECT 1: DOCX Generator -->
+          <article class="pearl-glass rounded-3xl overflow-hidden flex flex-col group">
+            <!-- Custom SVG Preview -->
+            <div class="relative h-52 bg-gradient-to-br from-abyss-950 via-abyss-900 to-abyss-800 border-b border-hydro/15 flex items-center justify-center p-6 overflow-hidden">
+              <div class="absolute inset-0 bg-[radial-gradient(circle_at_28%_28%,rgba(100,232,255,0.18),transparent_55%),radial-gradient(circle_at_82%_78%,rgba(255,142,196,0.16),transparent_55%)]"></div>
+              <svg class="w-full max-w-[270px] h-auto relative z-10 group-hover:scale-105 transition-transform duration-500" viewBox="0 0 300 165" fill="none" aria-hidden="true">
+                <defs>
+                  <linearGradient id="p1Grad" x1="60" y1="15" x2="210" y2="150" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#64e8ff" />
+                    <stop offset="0.5" stop-color="#c4b5fd" />
+                    <stop offset="1" stop-color="#ff8ec4" />
+                  </linearGradient>
+                </defs>
+                <rect x="62" y="18" width="130" height="128" rx="14" fill="rgba(11,22,54,0.9)" stroke="url(#p1Grad)" stroke-width="2" />
+                <rect x="80" y="38" width="46" height="8" rx="4" fill="#64e8ff" />
+                <rect x="80" y="56" width="92" height="5" rx="2.5" fill="#f0f8ff" opacity="0.45" />
+                <rect x="80" y="68" width="76" height="5" rx="2.5" fill="#f0f8ff" opacity="0.3" />
+                <rect x="80" y="86" width="92" height="22" rx="6" fill="rgba(100,232,255,0.12)" stroke="rgba(100,232,255,0.35)" />
+                <rect x="80" y="120" width="60" height="5" rx="2.5" fill="#ffb7d5" opacity="0.7" />
+                <rect x="164" y="92" width="78" height="34" rx="10" fill="rgba(17,34,77,0.96)" stroke="#64e8ff" stroke-width="1.5" />
+                <text x="203" y="114" text-anchor="middle" fill="#a6f4ff" font-family="JetBrains Mono, monospace" font-size="13" font-weight="600">.DOCX</text>
+              </svg>
+              <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-abyss-950/80 border border-hydro/30 text-[11px] font-mono text-hydro-bright">
+                Document Automation
+              </span>
+            </div>
+
+            <!-- Body -->
+            <div class="p-6 sm:p-7 flex-1 flex flex-col justify-between">
+              <div>
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-pearl mb-2.5 group-hover:text-hydro-bright transition-colors">
+                  DOCX Generator
+                </h3>
+                <p class="text-sm text-pearl/80 leading-relaxed mb-5 i18n-fade" data-i18n="projects.p1Desc">
+                  Alat otomasi pembuatan dokumen Microsoft Word (.docx) terstruktur berbasis template agar format laporan dan surat selalu rapi dan konsisten.
+                </p>
+                <div class="flex flex-wrap gap-2 mb-6">
+                  <span class="px-2.5 py-1 rounded-full bg-hydro/10 border border-hydro/25 text-xs font-mono text-hydro-bright">Python</span>
+                  <span class="px-2.5 py-1 rounded-full bg-coral/10 border border-coral/25 text-xs font-mono text-coral">DOCX</span>
+                  <span class="px-2.5 py-1 rounded-full bg-lavender/10 border border-lavender/25 text-xs font-mono text-lavender">Automation</span>
+                </div>
+              </div>
+
+              <div class="flex flex-wrap items-center gap-3 pt-4 border-t border-hydro/15">
+                <a
+                  href="https://github.com/chigusaaaa"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="btn-hydro px-4 py-2.5 rounded-full text-xs sm:text-sm font-semibold inline-flex items-center gap-2"
+                >
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                  <span class="i18n-fade" data-i18n="projects.viewGithub">Lihat di GitHub</span>
+                </a>
+                <button
+                  type="button"
+                  data-modal-project="docx"
+                  class="btn-pearl-outline px-4 py-2.5 rounded-full text-xs sm:text-sm font-medium cursor-pointer"
+                >
+                  <span class="i18n-fade" data-i18n="projects.detailsBtn">Detail</span>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- PROJECT 2: Thesis-to-E-Journal Converter -->
+          <article class="pearl-glass rounded-3xl overflow-hidden flex flex-col group">
+            <!-- Custom SVG Preview -->
+            <div class="relative h-52 bg-gradient-to-br from-abyss-950 via-abyss-900 to-abyss-800 border-b border-coral/15 flex items-center justify-center p-6 overflow-hidden">
+              <div class="absolute inset-0 bg-[radial-gradient(circle_at_75%_25%,rgba(255,142,196,0.18),transparent_55%),radial-gradient(circle_at_25%_80%,rgba(196,181,253,0.18),transparent_55%)]"></div>
+              <svg class="w-full max-w-[270px] h-auto relative z-10 group-hover:scale-105 transition-transform duration-500" viewBox="0 0 300 165" fill="none" aria-hidden="true">
+                <defs>
+                  <linearGradient id="p2Grad" x1="25" y1="25" x2="275" y2="145" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#ff8ec4" />
+                    <stop offset="0.5" stop-color="#c4b5fd" />
+                    <stop offset="1" stop-color="#64e8ff" />
+                  </linearGradient>
+                </defs>
+                <!-- Thesis -->
+                <rect x="26" y="28" width="92" height="110" rx="12" fill="rgba(11,22,54,0.9)" stroke="rgba(255,183,213,0.55)" stroke-width="1.8" />
+                <rect x="40" y="45" width="42" height="6" rx="3" fill="#ffb7d5" />
+                <rect x="40" y="60" width="64" height="4" rx="2" fill="#f0f8ff" opacity="0.4" />
+                <rect x="40" y="70" width="54" height="4" rx="2" fill="#f0f8ff" opacity="0.3" />
+                <rect x="40" y="102" width="54" height="18" rx="5" fill="rgba(255,142,196,0.15)" />
+                <text x="67" y="114" text-anchor="middle" fill="#ffb7d5" font-family="JetBrains Mono, monospace" font-size="9">THESIS</text>
+
+                <!-- Arrow -->
+                <path d="M128 83H168" stroke="url(#p2Grad)" stroke-width="2.5" stroke-linecap="round" />
+                <path d="M160 75L169 83L160 91" stroke="#64e8ff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+
+                <!-- E-Journal -->
+                <rect x="180" y="28" width="92" height="110" rx="12" fill="rgba(11,22,54,0.92)" stroke="url(#p2Grad)" stroke-width="2" />
+                <rect x="195" y="42" width="62" height="6" rx="3" fill="#64e8ff" />
+                <rect x="194" y="57" width="28" height="38" rx="4" fill="rgba(100,232,255,0.12)" stroke="rgba(100,232,255,0.32)" />
+                <rect x="230" y="57" width="28" height="38" rx="4" fill="rgba(196,181,253,0.12)" stroke="rgba(196,181,253,0.32)" />
+                <rect x="194" y="103" width="64" height="18" rx="5" fill="rgba(100,232,255,0.15)" />
+                <text x="226" y="115" text-anchor="middle" fill="#a6f4ff" font-family="JetBrains Mono, monospace" font-size="9">E-JOURNAL</text>
+              </svg>
+              <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-abyss-950/80 border border-coral/30 text-[11px] font-mono text-coral">
+                Academic Web App
+              </span>
+            </div>
+
+            <!-- Body -->
+            <div class="p-6 sm:p-7 flex-1 flex flex-col justify-between">
+              <div>
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-pearl mb-2.5 group-hover:text-coral transition-colors">
+                  Thesis-to-E-Journal Converter
+                </h3>
+                <p class="text-sm text-pearl/80 leading-relaxed mb-5 i18n-fade" data-i18n="projects.p2Desc">
+                  Aplikasi web yang mengonversi format skripsi/tugas akhir menjadi tata letak artikel e-journal siap publikasi secara otomatis.
+                </p>
+                <div class="flex flex-wrap gap-2 mb-6">
+                  <span class="px-2.5 py-1 rounded-full bg-coral/10 border border-coral/25 text-xs font-mono text-coral">Web App</span>
+                  <span class="px-2.5 py-1 rounded-full bg-hydro/10 border border-hydro/25 text-xs font-mono text-hydro-bright">Python</span>
+                  <span class="px-2.5 py-1 rounded-full bg-lavender/10 border border-lavender/25 text-xs font-mono text-lavender">E-Journal</span>
+                </div>
+              </div>
+
+              <div class="flex flex-wrap items-center gap-3 pt-4 border-t border-coral/15">
+                <a
+                  href="https://github.com/chigusaaaa"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="btn-hydro px-4 py-2.5 rounded-full text-xs sm:text-sm font-semibold inline-flex items-center gap-2"
+                >
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                  <span class="i18n-fade" data-i18n="projects.viewGithub">Lihat di GitHub</span>
+                </a>
+                <button
+                  type="button"
+                  data-modal-project="thesis"
+                  class="btn-pearl-outline px-4 py-2.5 rounded-full text-xs sm:text-sm font-medium cursor-pointer"
+                >
+                  <span class="i18n-fade" data-i18n="projects.detailsBtn">Detail</span>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <article class="pearl-glass rounded-3xl overflow-hidden flex flex-col group">
+            <div class="relative h-52 bg-gradient-to-br from-abyss-950 via-abyss-900 to-abyss-800 border-b border-hydro/15 flex items-center justify-center p-6 overflow-hidden">
+              <div class="absolute inset-0 bg-[radial-gradient(circle_at_28%_28%,rgba(100,232,255,0.16),transparent_55%),radial-gradient(circle_at_82%_78%,rgba(255,142,196,0.14),transparent_55%)]"></div>
+              <svg class="w-full max-w-[270px] h-auto relative z-10 group-hover:scale-105 transition-transform duration-500" viewBox="0 0 300 165" fill="none" aria-hidden="true">
+                <defs><linearGradient id="n1Grad" x1="30" y1="15" x2="270" y2="150" gradientUnits="userSpaceOnUse"><stop stop-color="#64e8ff" /><stop offset="0.5" stop-color="#c4b5fd" /><stop offset="1" stop-color="#ff8ec4" /></linearGradient></defs>
+                <rect x="30" y="22" width="100" height="56" rx="14" fill="rgba(11,22,54,0.9)" stroke="url(#n1Grad)" stroke-width="2"/><rect x="146" y="22" width="124" height="56" rx="14" fill="rgba(11,22,54,0.9)" stroke="rgba(100,232,255,0.5)" stroke-width="1.8"/><rect x="62" y="92" width="170" height="52" rx="14" fill="rgba(11,22,54,0.9)" stroke="rgba(255,183,213,0.55)" stroke-width="1.8"/><circle cx="62" cy="50" r="14" stroke="#64e8ff" stroke-width="3"/><rect x="164" y="38" width="70" height="6" rx="3" fill="#a6f4ff"/><rect x="164" y="54" width="50" height="4" rx="2" fill="#f0f8ff" opacity="0.4"/><rect x="82" y="108" width="130" height="6" rx="3" fill="#ffb7d5"/><rect x="82" y="124" width="90" height="4" rx="2" fill="#f0f8ff" opacity="0.35"/>
+              </svg>
+              <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-abyss-950/80 border border-hydro/30 text-hydro-bright text-[11px] font-mono">
+                Linux Desktop Rice
+              </span>
+            </div>
+            <div class="p-6 sm:p-7 flex-1 flex flex-col justify-between">
+              <div>
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-pearl mb-2.5 group-hover:text-hydro-bright transition-colors">
+                  Glassmorphic Quickshell Desktop
+                </h3>
+                <p class="text-sm text-pearl/80 leading-relaxed mb-5 i18n-fade" data-i18n="projects.qsDesc">
+                  Restyling antarmuka end-4 (illogical-impulse) di Hyprland menjadi kartu kaca melayang di atas wallpaper menggunakan QML dan Quickshell.
+                </p>
+                <div class="flex flex-wrap gap-2 mb-6">
+                  <span class="px-2.5 py-1 rounded-full border text-xs font-mono bg-hydro/10 border-hydro/25 text-hydro-bright">QML</span>
+                  <span class="px-2.5 py-1 rounded-full border text-xs font-mono bg-coral/10 border-coral/25 text-coral">Quickshell</span>
+                  <span class="px-2.5 py-1 rounded-full border text-xs font-mono bg-lavender/10 border-lavender/25 text-lavender">Hyprland</span>
+                  </div>
+              </div>
+              <div class="flex flex-wrap items-center gap-3 pt-4 border-t border-hydro/15">
+                <button
+                  type="button"
+                  data-modal-project="qs"
+                  class="btn-pearl-outline px-4 py-2.5 rounded-full text-xs sm:text-sm font-medium cursor-pointer"
+                >
+                  <span class="i18n-fade" data-i18n="projects.detailsBtn">Detail</span>
+                </button>
+              </div>
+            </div>
+          </article>
+          <article class="pearl-glass rounded-3xl overflow-hidden flex flex-col group">
+            <div class="relative h-52 bg-gradient-to-br from-abyss-950 via-abyss-900 to-abyss-800 border-b border-coral/15 flex items-center justify-center p-6 overflow-hidden">
+              <div class="absolute inset-0 bg-[radial-gradient(circle_at_28%_28%,rgba(100,232,255,0.16),transparent_55%),radial-gradient(circle_at_82%_78%,rgba(255,142,196,0.14),transparent_55%)]"></div>
+              <svg class="w-full max-w-[270px] h-auto relative z-10 group-hover:scale-105 transition-transform duration-500" viewBox="0 0 300 165" fill="none" aria-hidden="true">
+                <defs><linearGradient id="n2Grad" x1="30" y1="15" x2="270" y2="150" gradientUnits="userSpaceOnUse"><stop stop-color="#64e8ff" /><stop offset="0.5" stop-color="#c4b5fd" /><stop offset="1" stop-color="#ff8ec4" /></linearGradient></defs>
+                <rect x="50" y="22" width="200" height="30" rx="10" fill="rgba(11,22,54,0.92)" stroke="url(#n2Grad)" stroke-width="2"/><text x="150" y="42" text-anchor="middle" fill="#a6f4ff" font-family="JetBrains Mono, monospace" font-size="10">/ core (frozen)</text><rect x="50" y="62" width="200" height="30" rx="10" fill="rgba(11,22,54,0.92)" stroke="rgba(196,181,253,0.5)" stroke-width="1.8"/><text x="150" y="82" text-anchor="middle" fill="#c4b5fd" font-family="JetBrains Mono, monospace" font-size="10">/opt/labwc + apps</text><rect x="50" y="102" width="200" height="30" rx="10" fill="rgba(11,22,54,0.92)" stroke="rgba(255,183,213,0.55)" stroke-width="1.8"/><text x="150" y="122" text-anchor="middle" fill="#ffb7d5" font-family="JetBrains Mono, monospace" font-size="10">/container (Kali)</text>
+              </svg>
+              <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-abyss-950/80 border border-coral/30 text-coral text-[11px] font-mono">
+                Linux From Scratch
+              </span>
+            </div>
+            <div class="p-6 sm:p-7 flex-1 flex flex-col justify-between">
+              <div>
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-pearl mb-2.5 group-hover:text-coral transition-colors">
+                  Chigusa OS (LFS + Labwc)
+                </h3>
+                <p class="text-sm text-pearl/80 leading-relaxed mb-5 i18n-fade" data-i18n="projects.lfsDesc">
+                  Rencana membangun Linux From Scratch 12.4 dengan systemd dan Labwc bertema Sekai Pop untuk laptop 8 GB, dengan sistem inti yang ringan dan terpisah dari aplikasi.
+                </p>
+                <div class="flex flex-wrap gap-2 mb-6">
+                  <span class="px-2.5 py-1 rounded-full border text-xs font-mono bg-coral/10 border-coral/25 text-coral">LFS 12.4</span>
+                  <span class="px-2.5 py-1 rounded-full border text-xs font-mono bg-hydro/10 border-hydro/25 text-hydro-bright">Labwc</span>
+                  <span class="px-2.5 py-1 rounded-full border text-xs font-mono bg-lavender/10 border-lavender/25 text-lavender">Btrfs</span>
+                  </div>
+              </div>
+              <div class="flex flex-wrap items-center gap-3 pt-4 border-t border-coral/15">
+                <button
+                  type="button"
+                  data-modal-project="lfs"
+                  class="btn-pearl-outline px-4 py-2.5 rounded-full text-xs sm:text-sm font-medium cursor-pointer"
+                >
+                  <span class="i18n-fade" data-i18n="projects.detailsBtn">Detail</span>
+                </button>
+              </div>
+            </div>
+          </article>
+          <article class="pearl-glass rounded-3xl overflow-hidden flex flex-col group">
+            <div class="relative h-52 bg-gradient-to-br from-abyss-950 via-abyss-900 to-abyss-800 border-b border-hydro/15 flex items-center justify-center p-6 overflow-hidden">
+              <div class="absolute inset-0 bg-[radial-gradient(circle_at_28%_28%,rgba(100,232,255,0.16),transparent_55%),radial-gradient(circle_at_82%_78%,rgba(255,142,196,0.14),transparent_55%)]"></div>
+              <svg class="w-full max-w-[270px] h-auto relative z-10 group-hover:scale-105 transition-transform duration-500" viewBox="0 0 300 165" fill="none" aria-hidden="true">
+                <defs><linearGradient id="n3Grad" x1="30" y1="15" x2="270" y2="150" gradientUnits="userSpaceOnUse"><stop stop-color="#64e8ff" /><stop offset="0.5" stop-color="#c4b5fd" /><stop offset="1" stop-color="#ff8ec4" /></linearGradient></defs>
+                <rect x="36" y="100" width="62" height="44" rx="10" fill="rgba(11,22,54,0.92)" stroke="rgba(100,232,255,0.5)" stroke-width="1.8"/><rect x="118" y="68" width="62" height="76" rx="10" fill="rgba(11,22,54,0.92)" stroke="rgba(196,181,253,0.55)" stroke-width="1.8"/><rect x="200" y="30" width="62" height="114" rx="10" fill="rgba(11,22,54,0.92)" stroke="url(#n3Grad)" stroke-width="2"/><text x="67" y="126" text-anchor="middle" fill="#a6f4ff" font-family="JetBrains Mono, monospace" font-size="9">BEGIN</text><text x="149" y="110" text-anchor="middle" fill="#c4b5fd" font-family="JetBrains Mono, monospace" font-size="9">PRO</text><text x="231" y="92" text-anchor="middle" fill="#ffb7d5" font-family="JetBrains Mono, monospace" font-size="9">ADV</text>
+              </svg>
+              <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-abyss-950/80 border border-hydro/30 text-hydro-bright text-[11px] font-mono">
+                Educational Platform
+              </span>
+            </div>
+            <div class="p-6 sm:p-7 flex-1 flex flex-col justify-between">
+              <div>
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-pearl mb-2.5 group-hover:text-hydro-bright transition-colors">
+                  Web Edukasi IT
+                </h3>
+                <p class="text-sm text-pearl/80 leading-relaxed mb-5 i18n-fade" data-i18n="projects.eduDesc">
+                  Platform belajar IT untuk kelas, berisi materi, quiz, dan lab interaktif yang dibagi ke tiga tingkat: beginner, pro, dan advance.
+                </p>
+                <div class="flex flex-wrap gap-2 mb-6">
+                  <span class="px-2.5 py-1 rounded-full border text-xs font-mono bg-hydro/10 border-hydro/25 text-hydro-bright">Laravel</span>
+                  <span class="px-2.5 py-1 rounded-full border text-xs font-mono bg-coral/10 border-coral/25 text-coral">MySQL</span>
+                  <span class="px-2.5 py-1 rounded-full border text-xs font-mono bg-lavender/10 border-lavender/25 text-lavender">OAuth</span>
+                  </div>
+              </div>
+              <div class="flex flex-wrap items-center gap-3 pt-4 border-t border-hydro/15">
+                <button
+                  type="button"
+                  data-modal-project="edu"
+                  class="btn-pearl-outline px-4 py-2.5 rounded-full text-xs sm:text-sm font-medium cursor-pointer"
+                >
+                  <span class="i18n-fade" data-i18n="projects.detailsBtn">Detail</span>
+                </button>
+              </div>
+            </div>
+          </article>
+          <article class="pearl-glass rounded-3xl overflow-hidden flex flex-col group">
+            <div class="relative h-52 bg-gradient-to-br from-abyss-950 via-abyss-900 to-abyss-800 border-b border-coral/15 flex items-center justify-center p-6 overflow-hidden">
+              <div class="absolute inset-0 bg-[radial-gradient(circle_at_28%_28%,rgba(100,232,255,0.16),transparent_55%),radial-gradient(circle_at_82%_78%,rgba(255,142,196,0.14),transparent_55%)]"></div>
+              <svg class="w-full max-w-[270px] h-auto relative z-10 group-hover:scale-105 transition-transform duration-500" viewBox="0 0 300 165" fill="none" aria-hidden="true">
+                <defs><linearGradient id="n4Grad" x1="30" y1="15" x2="270" y2="150" gradientUnits="userSpaceOnUse"><stop stop-color="#64e8ff" /><stop offset="0.5" stop-color="#c4b5fd" /><stop offset="1" stop-color="#ff8ec4" /></linearGradient></defs>
+                <rect x="30" y="58" width="70" height="48" rx="12" fill="rgba(11,22,54,0.92)" stroke="rgba(100,232,255,0.5)" stroke-width="1.8"/><text x="65" y="86" text-anchor="middle" fill="#a6f4ff" font-family="JetBrains Mono, monospace" font-size="10">Win 10</text><rect x="200" y="58" width="70" height="48" rx="12" fill="rgba(11,22,54,0.92)" stroke="url(#n4Grad)" stroke-width="2"/><text x="235" y="86" text-anchor="middle" fill="#ffb7d5" font-family="JetBrains Mono, monospace" font-size="10">CHR</text><path d="M100 82H200" stroke="url(#n4Grad)" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="4 6"/><circle cx="150" cy="82" r="14" fill="rgba(11,22,54,0.95)" stroke="#ff8ec4" stroke-width="2"/><path d="M142 90L158 74" stroke="#ff8ec4" stroke-width="2.5" stroke-linecap="round"/>
+              </svg>
+              <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-abyss-950/80 border border-coral/30 text-coral text-[11px] font-mono">
+                Networking Lab
+              </span>
+            </div>
+            <div class="p-6 sm:p-7 flex-1 flex flex-col justify-between">
+              <div>
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-pearl mb-2.5 group-hover:text-coral transition-colors">
+                  Lab Blokir IP &amp; Website MikroTik
+                </h3>
+                <p class="text-sm text-pearl/80 leading-relaxed mb-5 i18n-fade" data-i18n="projects.netDesc">
+                  Praktikum Jaringan Lanjut: memblokir IP dan situs web lewat address list dan firewall rule di MikroTik CHR, diuji pada klien Windows 10 di VirtualBox.
+                </p>
+                <div class="flex flex-wrap gap-2 mb-6">
+                  <span class="px-2.5 py-1 rounded-full border text-xs font-mono bg-coral/10 border-coral/25 text-coral">MikroTik</span>
+                  <span class="px-2.5 py-1 rounded-full border text-xs font-mono bg-hydro/10 border-hydro/25 text-hydro-bright">Winbox</span>
+                  <span class="px-2.5 py-1 rounded-full border text-xs font-mono bg-lavender/10 border-lavender/25 text-lavender">VirtualBox</span>
+                  </div>
+              </div>
+              <div class="flex flex-wrap items-center gap-3 pt-4 border-t border-coral/15">
+                <button
+                  type="button"
+                  data-modal-project="net"
+                  class="btn-pearl-outline px-4 py-2.5 rounded-full text-xs sm:text-sm font-medium cursor-pointer"
+                >
+                  <span class="i18n-fade" data-i18n="projects.detailsBtn">Detail</span>
+                </button>
+              </div>
+            </div>
+          </article>
+          <article class="pearl-glass rounded-3xl overflow-hidden flex flex-col group">
+            <div class="relative h-52 bg-gradient-to-br from-abyss-950 via-abyss-900 to-abyss-800 border-b border-hydro/15 flex items-center justify-center p-6 overflow-hidden">
+              <div class="absolute inset-0 bg-[radial-gradient(circle_at_28%_28%,rgba(100,232,255,0.16),transparent_55%),radial-gradient(circle_at_82%_78%,rgba(255,142,196,0.14),transparent_55%)]"></div>
+              <svg class="w-full max-w-[270px] h-auto relative z-10 group-hover:scale-105 transition-transform duration-500" viewBox="0 0 300 165" fill="none" aria-hidden="true">
+                <defs><linearGradient id="n5Grad" x1="30" y1="15" x2="270" y2="150" gradientUnits="userSpaceOnUse"><stop stop-color="#64e8ff" /><stop offset="0.5" stop-color="#c4b5fd" /><stop offset="1" stop-color="#ff8ec4" /></linearGradient></defs>
+                <rect x="108" y="14" width="84" height="138" rx="16" fill="rgba(11,22,54,0.92)" stroke="url(#n5Grad)" stroke-width="2"/><rect x="132" y="22" width="36" height="5" rx="2.5" fill="#f0f8ff" opacity="0.35"/><rect x="122" y="40" width="56" height="30" rx="8" fill="rgba(100,232,255,0.14)" stroke="rgba(100,232,255,0.35)"/><rect x="122" y="78" width="56" height="8" rx="4" fill="#ffb7d5"/><rect x="122" y="94" width="40" height="5" rx="2.5" fill="#f0f8ff" opacity="0.35"/><rect x="122" y="124" width="56" height="16" rx="8" fill="rgba(196,181,253,0.2)" stroke="rgba(196,181,253,0.45)"/>
+              </svg>
+              <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-abyss-950/80 border border-hydro/30 text-hydro-bright text-[11px] font-mono">
+                Android App
+              </span>
+            </div>
+            <div class="p-6 sm:p-7 flex-1 flex flex-col justify-between">
+              <div>
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-pearl mb-2.5 group-hover:text-hydro-bright transition-colors">
+                  Basuwi
+                </h3>
+                <p class="text-sm text-pearl/80 leading-relaxed mb-5 i18n-fade" data-i18n="projects.appDesc">
+                  Aplikasi Android (APK) yang saya kembangkan sendiri.
+                </p>
+                <div class="flex flex-wrap gap-2 mb-6">
+                  <span class="px-2.5 py-1 rounded-full border text-xs font-mono bg-hydro/10 border-hydro/25 text-hydro-bright">Android</span>
+                  <span class="px-2.5 py-1 rounded-full border text-xs font-mono bg-lavender/10 border-lavender/25 text-lavender">APK</span>
+                  </div>
+              </div>
+              <div class="flex flex-wrap items-center gap-3 pt-4 border-t border-hydro/15">
+                <button
+                  type="button"
+                  data-modal-project="app"
+                  class="btn-pearl-outline px-4 py-2.5 rounded-full text-xs sm:text-sm font-medium cursor-pointer"
+                >
+                  <span class="i18n-fade" data-i18n="projects.detailsBtn">Detail</span>
+                </button>
+              </div>
+            </div>
+          </article>
+          <article class="pearl-glass rounded-3xl overflow-hidden flex flex-col group">
+            <div class="relative h-52 bg-gradient-to-br from-abyss-950 via-abyss-900 to-abyss-800 border-b border-coral/15 flex items-center justify-center p-6 overflow-hidden">
+              <div class="absolute inset-0 bg-[radial-gradient(circle_at_28%_28%,rgba(100,232,255,0.16),transparent_55%),radial-gradient(circle_at_82%_78%,rgba(255,142,196,0.14),transparent_55%)]"></div>
+              <svg class="w-full max-w-[270px] h-auto relative z-10 group-hover:scale-105 transition-transform duration-500" viewBox="0 0 300 165" fill="none" aria-hidden="true">
+                <defs><linearGradient id="n6Grad" x1="30" y1="15" x2="270" y2="150" gradientUnits="userSpaceOnUse"><stop stop-color="#64e8ff" /><stop offset="0.5" stop-color="#c4b5fd" /><stop offset="1" stop-color="#ff8ec4" /></linearGradient></defs>
+                <rect x="62" y="22" width="176" height="36" rx="10" fill="rgba(11,22,54,0.92)" stroke="url(#n6Grad)" stroke-width="2"/><rect x="62" y="64" width="176" height="36" rx="10" fill="rgba(11,22,54,0.92)" stroke="rgba(196,181,253,0.5)" stroke-width="1.8"/><rect x="62" y="106" width="176" height="36" rx="10" fill="rgba(11,22,54,0.92)" stroke="rgba(255,183,213,0.55)" stroke-width="1.8"/><circle cx="82" cy="40" r="4" fill="#64e8ff"/><circle cx="82" cy="82" r="4" fill="#c4b5fd"/><circle cx="82" cy="124" r="4" fill="#ff8ec4"/><rect x="100" y="37" width="90" height="6" rx="3" fill="#f0f8ff" opacity="0.4"/><rect x="100" y="79" width="70" height="6" rx="3" fill="#f0f8ff" opacity="0.4"/><rect x="100" y="121" width="108" height="6" rx="3" fill="#f0f8ff" opacity="0.4"/>
+              </svg>
+              <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-abyss-950/80 border border-coral/30 text-coral text-[11px] font-mono">
+                Self-Hosted
+              </span>
+            </div>
+            <div class="p-6 sm:p-7 flex-1 flex flex-col justify-between">
+              <div>
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-pearl mb-2.5 group-hover:text-coral transition-colors">
+                  Live Server
+                </h3>
+                <p class="text-sm text-pearl/80 leading-relaxed mb-5 i18n-fade" data-i18n="projects.srvDesc">
+                  Server pribadi yang saya hosting sendiri lewat Tailscale. Isinya berganti-ganti, tergantung apa yang sedang ingin saya kerjakan.
+                </p>
+                <div class="flex flex-wrap gap-2 mb-6">
+                  <span class="px-2.5 py-1 rounded-full border text-xs font-mono bg-coral/10 border-coral/25 text-coral">Self-Hosted</span>
+                  <span class="px-2.5 py-1 rounded-full border text-xs font-mono bg-hydro/10 border-hydro/25 text-hydro-bright">Tailscale</span>
+                  </div>
+              </div>
+              <div class="flex flex-wrap items-center gap-3 pt-4 border-t border-coral/15">
+                <a href="https://chigusaaaa.tail19767d.ts.net/" target="_blank" rel="noopener noreferrer" class="btn-hydro px-4 py-2.5 rounded-full text-xs sm:text-sm font-semibold inline-flex items-center gap-2">
+                  <span class="i18n-fade" data-i18n="projects.openServer">Buka Server</span>
+                </a>
+                <a href="https://chigusaaaa.tail19767d.ts.net:8443/" target="_blank" rel="noopener noreferrer" class="btn-pearl-outline px-4 py-2.5 rounded-full text-xs sm:text-sm font-medium">
+                  Port 8443
+                </a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         4. CONTACT SECTION
+         ====================================================================== -->
+    <section id="contact" class="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 reveal-section">
+      <div class="max-w-5xl mx-auto">
+        <div class="pearl-glass rounded-[2rem] p-7 sm:p-11 relative overflow-hidden">
+          <div class="absolute -top-24 -right-24 w-64 h-64 rounded-full bg-coral-deep/15 blur-3xl pointer-events-none"></div>
+          <div class="absolute -bottom-24 -left-24 w-64 h-64 rounded-full bg-hydro/15 blur-3xl pointer-events-none"></div>
+
+          <div class="relative z-10 text-center max-w-xl mx-auto mb-10">
+            <div class="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.22em] text-hydro-bright mb-2.5">
+              <span class="w-6 h-px bg-gradient-to-r from-transparent to-hydro"></span>
+              <span class="i18n-fade" data-i18n="contact.kicker">Mari Terhubung</span>
+              <span class="w-6 h-px bg-gradient-to-l from-transparent to-coral"></span>
+            </div>
+            <h2 class="font-serif text-3xl sm:text-4xl font-bold text-pearl mb-3 i18n-fade" data-i18n="contact.title">
+              Hubungi Saya
+            </h2>
+            <p class="text-sm sm:text-base text-pearl/80 i18n-fade" data-i18n="contact.subtitle">
+              Terbuka untuk diskusi proyek web, tools Python, maupun kolaborasi lainnya.
+            </p>
+          </div>
+
+          <div class="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-5">
+            <!-- GitHub -->
+            <a
+              href="https://github.com/chigusaaaa"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group p-6 rounded-2xl bg-abyss-950/65 border border-hydro/25 hover:border-hydro/65 hover:-translate-y-1 transition-all flex flex-col items-center text-center"
+            >
+              <span class="w-12 h-12 rounded-2xl bg-hydro/15 border border-hydro/35 flex items-center justify-center text-hydro-bright mb-4 group-hover:scale-110 transition-transform">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+              </span>
+              <h3 class="font-semibold text-pearl mb-1">GitHub</h3>
+              <p class="text-xs font-mono text-hydro-bright mb-3">@chigusaaaa</p>
+              <span class="text-xs text-pearl/65 group-hover:text-pearl i18n-fade" data-i18n="contact.openProfile">Buka Profil &rarr;</span>
+            </a>
+
+            <!-- Email (Click-to-Copy + Toast) -->
+            <div class="group p-6 rounded-2xl bg-abyss-950/65 border border-coral/25 hover:border-coral/65 hover:-translate-y-1 transition-all flex flex-col items-center text-center">
+              <span class="w-12 h-12 rounded-2xl bg-coral/15 border border-coral/35 flex items-center justify-center text-coral mb-4 group-hover:scale-110 transition-transform">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+              </span>
+              <h3 class="font-semibold text-pearl mb-1">Email</h3>
+              <a href="mailto:hazwan.fahmi@email.com" class="text-xs font-mono text-coral hover:underline mb-3 break-all">
+                hazwan.fahmi@email.com
+              </a>
+              <button
+                id="copy-email-btn"
+                type="button"
+                class="px-3.5 py-1.5 rounded-full bg-coral/15 border border-coral/35 text-xs font-medium text-pearl hover:bg-coral/25 transition-colors inline-flex items-center gap-1.5 cursor-pointer"
+              >
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+                <span class="i18n-fade" data-i18n="contact.copyEmail">Salin Email</span>
+              </button>
+            </div>
+
+            <!-- Instagram -->
+            <a
+              href="https://instagram.com/chigusaaaa"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group p-6 rounded-2xl bg-abyss-950/65 border border-lavender/25 hover:border-lavender/65 hover:-translate-y-1 transition-all flex flex-col items-center text-center"
+            >
+              <span class="w-12 h-12 rounded-2xl bg-lavender/15 border border-lavender/35 flex items-center justify-center text-lavender mb-4 group-hover:scale-110 transition-transform">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                  <rect x="2.5" y="2.5" width="19" height="19" rx="5" />
+                  <circle cx="12" cy="12" r="4.2" />
+                  <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+                </svg>
+              </span>
+              <h3 class="font-semibold text-pearl mb-1">Instagram</h3>
+              <p class="text-xs font-mono text-lavender mb-3">@chigusaaaa</p>
+              <span class="text-xs text-pearl/65 group-hover:text-pearl i18n-fade" data-i18n="contact.openProfile">Buka Profil &rarr;</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Watatsumi Wave SVG Divider -->
+    <div class="w-full overflow-hidden leading-none opacity-90 -mb-1" aria-hidden="true">
+      <svg class="w-full h-14 sm:h-20" viewBox="0 0 1440 120" preserveAspectRatio="none">
+        <path fill="rgba(100, 232, 255, 0.08)" d="M0,48 C240,104 480,12 720,56 C960,100 1200,24 1440,64 L1440,120 L0,120 Z"></path>
+        <path fill="rgba(6, 13, 36, 0.72)" d="M0,76 C320,26 640,114 960,64 C1180,30 1340,72 1440,86 L1440,120 L0,120 Z"></path>
+      </svg>
+    </div>
+
+    <!-- ======================================================================
+         5. MINIMAL CLEAN FOOTER
+         ====================================================================== -->
+    <footer class="bg-abyss-950/75 backdrop-blur-md border-t border-hydro/15">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p class="text-sm text-pearl/80">
+          &copy; 2026 <span class="font-semibold text-pearl">Hazwan Fahmi Ghailan</span>
+        </p>
+        <a
+          href="#home"
+          class="btn-pearl-outline px-4 py-2 rounded-full text-xs font-mono inline-flex items-center gap-2"
+        >
+          <span class="i18n-fade" data-i18n="footer.backTop">Kembali ke Atas</span>
+          <svg class="w-3.5 h-3.5 text-hydro-bright" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
+          </svg>
+        </a>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- ========================================================================
+       PROJECT DETAIL MODAL
+       ======================================================================== -->
+  <div
+    id="project-modal"
+    class="modal-hidden fixed inset-0 z-[70] flex items-center justify-center p-4 bg-abyss-950/80 backdrop-blur-md"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modal-title"
+  >
+    <div class="pearl-glass rounded-3xl max-w-lg w-full p-7 sm:p-8 relative border border-hydro/40">
+      <button
+        id="modal-close-btn"
+        type="button"
+        aria-label="Close Modal"
+        class="absolute top-5 right-5 w-9 h-9 rounded-full bg-abyss-950/75 border border-hydro/30 flex items-center justify-center text-pearl/80 hover:text-pearl hover:border-coral/60 transition-colors cursor-pointer"
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+
+      <span id="modal-category" class="inline-block px-3 py-1 rounded-full bg-hydro/15 border border-hydro/35 text-xs font-mono text-hydro-bright mb-3"></span>
+      <h3 id="modal-title" class="font-serif text-2xl font-bold text-pearl mb-3"></h3>
+      <p id="modal-desc" class="text-sm sm:text-base text-pearl/85 leading-relaxed mb-5"></p>
+
+      <div class="mb-6">
+        <h4 class="text-xs font-mono uppercase tracking-wider text-coral mb-2.5 i18n-fade" data-i18n="modal.highlights">Sorotan Fitur</h4>
+        <ul id="modal-highlights" class="space-y-2 text-sm text-pearl/85"></ul>
+      </div>
+
+      <div class="flex items-center justify-end gap-3 pt-4 border-t border-hydro/15">
+        <button id="modal-close-secondary" type="button" class="btn-pearl-outline px-4 py-2 rounded-full text-xs sm:text-sm cursor-pointer">
+          <span class="i18n-fade" data-i18n="modal.close">Tutup</span>
+        </button>
+        <a
+          href="https://github.com/chigusaaaa"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-hydro px-5 py-2 rounded-full text-xs sm:text-sm font-semibold"
+        >
+          <span class="i18n-fade" data-i18n="projects.viewGithub">Lihat di GitHub</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       WATATSUMI TOAST NOTIFICATION (NO ALERT())
+       ======================================================================== -->
+  <div id="toast-box" role="status" aria-live="polite">
+    <div class="pearl-glass rounded-full px-5 py-3 border border-hydro/50 flex items-center gap-2.5 shadow-xl">
+      <span class="w-2.5 h-2.5 rounded-full bg-hydro shadow-[0_0_10px_#64e8ff]"></span>
+      <span id="toast-message" class="text-xs sm:text-sm font-medium text-pearl"></span>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       JAVASCRIPT: AVATAR FALLBACK/UPLOAD, BILINGUAL I18N, INTERACTIONS, CANVAS
+       ======================================================================== -->
+  <script>
+    (function () {
+      'use strict';
+
+      /* ----------------------------------------------------------------------
+         1. BILINGUAL I18N (ID / EN)
+         ---------------------------------------------------------------------- */
+      const translations = {
+        id: {
+          'nav.home': 'Beranda',
+          'nav.about': 'Tentang',
+          'nav.projects': 'Proyek',
+          'nav.contact': 'Kontak',
+          'hero.status': 'Terbuka untuk Kolaborasi',
+          'hero.role': 'Mahasiswa Teknik Informatika & Developer',
+          'hero.bio': 'Membangun aplikasi web, alat otomasi dokumen berbasis Python, antarmuka yang bersih, serta mengeksplorasi ekosistem Linux untuk alur kerja yang efisien.',
+          'hero.ctaProjects': 'Lihat Proyek',
+          'hero.ctaContact': 'Hubungi Saya',
+          'hero.uploadPhoto': 'Muat Foto',
+          'hero.previewPhotoHint': 'Pilih foto lokal untuk preview',
+          'about.kicker': 'Profil & Keahlian',
+          'about.title': 'Tentang Saya',
+          'about.bioHeading': 'Latar Belakang',
+          'about.bioP1': 'Saya Hazwan Fahmi Ghailan, mahasiswa Teknik Informatika yang fokus pada pengembangan web, pembuatan perangkat bantu berbasis Python, desain UI yang bersih, serta oprek sistem Linux.',
+          'about.bioP2': 'Saya senang membangun tools praktis yang memangkas pekerjaan manual berulang—seperti otomasi penyusunan dokumen dan konversi format tulisan akademik—sambil menjaga kode tetap rapi dan mudah dikembangkan.',
+          'about.bioP3': 'Di luar proyek, saya mengerjakan praktikum Pemrograman Web (Laravel), Basis Data Lanjut, dan Jaringan Lanjut (MikroTik), merakit desktop Linux sendiri dengan CachyOS dan Hyprland, serta menjalankan layanan self-hosted lewat Docker dan Tailscale. Saya juga berkarya sebagai kreator dengan nama chigusa.',
+          'about.skillsHeading': 'Tech Stack',
+          'about.skillsNote': 'Fokus pada arsitektur bersih & performa ringan.',
+          'projects.kicker': 'Karya Pilihan',
+          'projects.title': 'Proyek Unggulan',
+          'projects.subtitle': 'Proyek pilihan saya, mulai dari otomasi dokumen dan penulisan akademik, desktop Linux, hingga platform belajar dan jaringan.',
+          'projects.p1Desc': 'Alat otomasi pembuatan dokumen Microsoft Word (.docx) terstruktur berbasis template agar format laporan dan surat selalu rapi dan konsisten.',
+          'projects.p2Desc': 'Aplikasi web yang mengonversi format skripsi/tugas akhir menjadi tata letak artikel e-journal siap publikasi secara otomatis.',
+          'projects.qsDesc': 'Restyling antarmuka end-4 (illogical-impulse) di Hyprland menjadi kartu kaca melayang di atas wallpaper menggunakan QML dan Quickshell.',
+          'projects.lfsDesc': 'Rencana membangun Linux From Scratch 12.4 dengan systemd dan Labwc bertema Sekai Pop untuk laptop 8 GB, dengan sistem inti yang ringan dan terpisah dari aplikasi.',
+          'projects.eduDesc': 'Platform belajar IT untuk kelas, berisi materi, quiz, dan lab interaktif yang dibagi ke tiga tingkat: beginner, pro, dan advance.',
+          'projects.netDesc': 'Praktikum Jaringan Lanjut: memblokir IP dan situs web lewat address list dan firewall rule di MikroTik CHR, diuji pada klien Windows 10 di VirtualBox.',
+          'projects.appDesc': 'Aplikasi Android (APK) yang saya kembangkan sendiri.',
+          'projects.srvDesc': 'Server pribadi yang saya hosting sendiri lewat Tailscale. Isinya berganti-ganti, tergantung apa yang sedang ingin saya kerjakan.',
+          'projects.openServer': 'Buka Server',
+          'projects.viewGithub': 'Lihat di GitHub',
+          'projects.detailsBtn': 'Detail',
+          'contact.kicker': 'Mari Terhubung',
+          'contact.title': 'Hubungi Saya',
+          'contact.subtitle': 'Terbuka untuk diskusi proyek web, tools Python, maupun kolaborasi lainnya.',
+          'contact.openProfile': 'Buka Profil →',
+          'contact.copyEmail': 'Salin Email',
+          'footer.backTop': 'Kembali ke Atas',
+          'modal.highlights': 'Sorotan Fitur',
+          'modal.close': 'Tutup',
+          'toast.copied': 'Email berhasil disalin ke clipboard!',
+          'toast.copyFail': 'Gagal menyalin email, silakan salin secara manual.',
+          'toast.photoUpdated': 'Foto profil berhasil diperbarui!'
+        },
+        en: {
+          'nav.home': 'Home',
+          'nav.about': 'About',
+          'nav.projects': 'Projects',
+          'nav.contact': 'Contact',
+          'hero.status': 'Available for Collaboration',
+          'hero.role': 'Informatics Student & Developer',
+          'hero.bio': 'Building web applications, Python-based document automation tools, clean user interfaces, and tinkering with Linux systems for efficient workflows.',
+          'hero.ctaProjects': 'Explore Projects',
+          'hero.ctaContact': 'Get in Touch',
+          'hero.uploadPhoto': 'Load Photo',
+          'hero.previewPhotoHint': 'Select local photo for preview',
+          'about.kicker': 'Profile & Skills',
+          'about.title': 'About Me',
+          'about.bioHeading': 'Background',
+          'about.bioP1': 'I am Hazwan Fahmi Ghailan, an Informatics Engineering student focused on web development, Python utilities, clean UI craftsmanship, and Linux/systems tinkering.',
+          'about.bioP2': 'I enjoy building practical tools that eliminate repetitive manual tasks—such as structured document generation and academic formatting conversion—while keeping code clean and maintainable.',
+          'about.bioP3': 'Outside projects, I work through practicums in Web Programming (Laravel), Advanced Databases, and Advanced Networking (MikroTik), build my own Linux desktop on CachyOS and Hyprland, and run self-hosted services with Docker and Tailscale. I also create as a creator under the name chigusa.',
+          'about.skillsHeading': 'Tech Stack',
+          'about.skillsNote': 'Focused on clean architecture & lightweight performance.',
+          'projects.kicker': 'Selected Works',
+          'projects.title': 'Featured Projects',
+          'projects.subtitle': 'Selected projects, from document automation and academic writing to Linux desktops, learning platforms, and networking.',
+          'projects.p1Desc': 'Automated document generation tool for structured Microsoft Word (.docx) files based on reusable templates for consistent formatting.',
+          'projects.p2Desc': 'Web application that converts thesis/skripsi manuscripts into ready-to-publish e-journal article layouts automatically.',
+          'projects.qsDesc': 'A restyle of the end-4 (illogical-impulse) interface on Hyprland into floating glass cards over the wallpaper, built with QML and Quickshell.',
+          'projects.lfsDesc': 'A plan to build Linux From Scratch 12.4 with systemd and a Sekai Pop themed Labwc desktop for an 8 GB laptop, keeping the core system light and separate from apps.',
+          'projects.eduDesc': 'An IT learning platform for my class with lessons, quizzes, and interactive labs, organized into three tiers: beginner, pro, and advance.',
+          'projects.netDesc': 'Advanced Networking practicum: blocking IPs and websites with address lists and firewall rules on a MikroTik CHR, tested on a Windows 10 client in VirtualBox.',
+          'projects.appDesc': 'An Android app (APK) that I develop myself.',
+          'projects.srvDesc': 'A personal server that I host myself through Tailscale. What runs on it changes with whatever I feel like working on.',
+          'projects.openServer': 'Open Server',
+          'projects.viewGithub': 'View on GitHub',
+          'projects.detailsBtn': 'Details',
+          'contact.kicker': 'Let’s Connect',
+          'contact.title': 'Get in Touch',
+          'contact.subtitle': 'Open to discussing web projects, Python tools, or collaboration opportunities.',
+          'contact.openProfile': 'Open Profile →',
+          'contact.copyEmail': 'Copy Email',
+          'footer.backTop': 'Back to Top',
+          'modal.highlights': 'Key Highlights',
+          'modal.close': 'Close',
+          'toast.copied': 'Email copied to clipboard!',
+          'toast.copyFail': 'Could not copy email, please copy manually.',
+          'toast.photoUpdated': 'Profile photo updated!'
+        }
+      };
+
+      const projectDetails = {
+        docx: {
+          category: 'Document Automation',
+          title: 'DOCX Generator',
+          id: {
+            desc: 'Alat otomasi pembuatan dokumen Microsoft Word (.docx) terstruktur berbasis template agar format laporan dan surat selalu rapi dan konsisten.',
+            highlights: [
+              'Pengisian data otomatis ke template .docx tanpa merusak gaya tipografi asli.',
+              'Mempercepat pembuatan dokumen berulang dengan hasil terstruktur.',
+              'Ringan dan mudah diintegrasikan dalam alur kerja berbasis Python.',
+              'Berkembang menjadi dashboard web FastAPI + WebSocket dengan lapisan AI yang tidak terikat satu penyedia (Ollama atau API kompatibel OpenAI).',
+              'Engine render memakai Node.js (docx-js) untuk kontrol tata letak multi-seksi, dengan pembuat kuesioner Likert, tabel markdown, dan grafik.'
+            ]
+          },
+          en: {
+            desc: 'Automated document generation tool for structured Microsoft Word (.docx) files based on reusable templates for consistent formatting.',
+            highlights: [
+              'Injects dynamic data into .docx templates while preserving original typography.',
+              'Speeds up repetitive document creation with structured output.',
+              'Lightweight and easy to integrate into Python-based workflows.',
+              'Grew into a FastAPI + WebSocket web dashboard with a provider-agnostic AI layer (Ollama or OpenAI-compatible APIs).',
+              'Renders with a Node.js (docx-js) engine for multi-section layout control, plus a Likert questionnaire builder, markdown tables, and charts.'
+            ]
+          }
+        },
+        thesis: {
+          category: 'Academic Web App',
+          title: 'Thesis-to-E-Journal Converter',
+          id: {
+            desc: 'Aplikasi web yang mengonversi format skripsi/tugas akhir menjadi tata letak artikel e-journal siap publikasi secara otomatis.',
+            highlights: [
+              'Memetakan struktur bab skripsi ke dalam bagian artikel jurnal ilmiah.',
+              'Menyesuaikan tata letak dan format akademik secara otomatis.',
+              'Menghemat waktu penyuntingan manual sebelum publikasi e-journal.',
+              'Memakai API Gemini dan Claude untuk memproses isi naskah.'
+            ]
+          },
+          en: {
+            desc: 'Web application that converts thesis/skripsi manuscripts into ready-to-publish e-journal article layouts automatically.',
+            highlights: [
+              'Maps thesis chapters into concise e-journal article sections.',
+              'Automates academic layout and formatting adjustments.',
+              'Reduces manual formatting effort prior to e-journal submission.',
+              'Uses the Gemini and Claude APIs to process manuscript content.'
+            ]
+          }
+        },
+        qs: {
+          category: 'Linux Desktop Rice',
+          title: 'Glassmorphic Quickshell Desktop',
+          id: {
+            desc: "Restyling antarmuka end-4 (illogical-impulse) di Hyprland menjadi kartu kaca melayang di atas wallpaper menggunakan QML dan Quickshell.",
+            highlights: [
+              'Kartu cuaca dengan prakiraan, gauge CPU/RAM/GPU melingkar, statistik jaringan dan disk, pemutar media, serta jam analog bulat.',
+              'Komponen QML buatan sendiri (GlassCard, SysmonWidget, NetDiskWidget, MediaWidget) dengan skrip bash untuk statistik sistem.',
+              'Bisa berpindah antar-rice lewat fungsi fish dan symlink.'
+            ]
+          },
+          en: {
+            desc: "A restyle of the end-4 (illogical-impulse) interface on Hyprland into floating glass cards over the wallpaper, built with QML and Quickshell.",
+            highlights: [
+              'Weather card with forecast, circular CPU/RAM/GPU gauges, network and disk stats, a media player, and a round analog clock.',
+              'Custom QML components (GlassCard, SysmonWidget, NetDiskWidget, MediaWidget) with bash scripts for system stats.',
+              'Switches between rices through a fish function and symlinks.'
+            ]
+          }
+        },
+        lfs: {
+          category: 'Linux From Scratch',
+          title: 'Chigusa OS (LFS + Labwc)',
+          id: {
+            desc: "Rencana membangun Linux From Scratch 12.4 dengan systemd dan Labwc bertema Sekai Pop untuk laptop 8 GB, dengan sistem inti yang ringan dan terpisah dari aplikasi.",
+            highlights: [
+              'Tata letak tiga lapis: inti beku di /, desktop di /opt/labwc, remote di /opt/remote, dan aplikasi di /opt/apps.',
+              'Btrfs dengan subvolume @home, dan Kali Linux lewat Distrobox di /container.',
+              'Akses remote lewat Tailscale dan OpenSSH.',
+              'Status: masih tahap perencanaan dan persiapan build.'
+            ]
+          },
+          en: {
+            desc: "A plan to build Linux From Scratch 12.4 with systemd and a Sekai Pop themed Labwc desktop for an 8 GB laptop, keeping the core system light and separate from apps.",
+            highlights: [
+              'Three-layer layout: frozen core at /, desktop in /opt/labwc, remote tools in /opt/remote, and apps in /opt/apps.',
+              'Btrfs with an @home subvolume, and Kali Linux through Distrobox in /container.',
+              'Remote access through Tailscale and OpenSSH.',
+              'Status: still in planning and build preparation.'
+            ]
+          }
+        },
+        edu: {
+          category: 'Educational Platform',
+          title: 'Web Edukasi IT',
+          id: {
+            desc: "Platform belajar IT untuk kelas, berisi materi, quiz, dan lab interaktif yang dibagi ke tiga tingkat: beginner, pro, dan advance.",
+            highlights: [
+              'Tiga tingkat belajar: beginner, pro, dan advance, dengan tahap yang terkunci sampai tahap sebelumnya selesai (dicek di server).',
+              'Mata kuliah dianggap selesai setelah semua materi dibaca dan quiz lulus.',
+              'Materi dikelola dari halaman admin dan disimpan di database.',
+              'Login lewat akun Google atau GitHub, serta lab keamanan interaktif berbasis simulasi shell.',
+              'Status: sedang dikembangkan dengan Laravel.'
+            ]
+          },
+          en: {
+            desc: "An IT learning platform for my class with lessons, quizzes, and interactive labs, organized into three tiers: beginner, pro, and advance.",
+            highlights: [
+              'Three learning tiers: beginner, pro, and advance, with stages locked until the previous one is finished (enforced on the server).',
+              'A course counts as complete after all lessons are read and the quiz is passed.',
+              'Content is managed from an admin page and stored in a database.',
+              'Sign-in with a Google or GitHub account, plus interactive security labs based on a simulated shell.',
+              'Status: in development with Laravel.'
+            ]
+          }
+        },
+        net: {
+          category: 'Networking Lab',
+          title: 'Lab Blokir IP & Website MikroTik',
+          id: {
+            desc: "Praktikum Jaringan Lanjut: memblokir IP dan situs web lewat address list dan firewall rule di MikroTik CHR, diuji pada klien Windows 10 di VirtualBox.",
+            highlights: [
+              'Topologi CHR di VirtualBox dengan satu adapter NAT dan satu host-only, ditambah satu klien Windows 10.',
+              'Klien mendapat IP dari DHCP VirtualBox, lalu diuji lewat address list dan rule firewall.',
+              'Dikonfigurasi lewat Winbox dan didokumentasikan sebagai laporan praktikum.'
+            ]
+          },
+          en: {
+            desc: "Advanced Networking practicum: blocking IPs and websites with address lists and firewall rules on a MikroTik CHR, tested on a Windows 10 client in VirtualBox.",
+            highlights: [
+              'CHR topology in VirtualBox with one NAT and one host-only adapter, plus a Windows 10 client.',
+              'The client gets its IP from the VirtualBox DHCP and is tested through an address list and firewall rules.',
+              'Configured through Winbox and documented as a practicum report.'
+            ]
+          }
+        },
+        app: {
+          category: 'Android App',
+          title: 'Basuwi',
+          id: {
+            desc: "Aplikasi Android (APK) yang saya kembangkan sendiri.",
+            highlights: [
+              'Berupa aplikasi Android dalam format APK.'
+            ]
+          },
+          en: {
+            desc: "An Android app (APK) that I develop myself.",
+            highlights: [
+              'An Android app packaged as an APK.'
+            ]
+          }
+        }
+      };
+
+      let currentLang = 'id';
+      try {
+        const savedLang = localStorage.getItem('watatsumi_lang');
+        if (savedLang === 'en' || savedLang === 'id') currentLang = savedLang;
+      } catch (e) {}
+
+      const langToggleBtn = document.getElementById('lang-toggle');
+      const langIdPill = document.getElementById('lang-id-pill');
+      const langEnPill = document.getElementById('lang-en-pill');
+
+      function applyLanguage(lang, animate = true) {
+        currentLang = lang;
+        document.documentElement.lang = lang;
+        try { localStorage.setItem('watatsumi_lang', lang); } catch (e) {}
+
+        if (lang === 'id') {
+          langIdPill.className = 'px-2.5 py-1 rounded-full transition-all duration-300 bg-gradient-to-r from-hydro/35 to-coral-deep/35 text-pearl shadow-sm';
+          langEnPill.className = 'px-2.5 py-1 rounded-full transition-all duration-300 text-pearl/60';
+        } else {
+          langEnPill.className = 'px-2.5 py-1 rounded-full transition-all duration-300 bg-gradient-to-r from-hydro/35 to-coral-deep/35 text-pearl shadow-sm';
+          langIdPill.className = 'px-2.5 py-1 rounded-full transition-all duration-300 text-pearl/60';
+        }
+
+        const els = document.querySelectorAll('[data-i18n]');
+        if (animate) {
+          els.forEach(el => el.classList.add('i18n-fading'));
+          setTimeout(() => {
+            els.forEach(el => {
+              const key = el.getAttribute('data-i18n');
+              if (translations[lang] && translations[lang][key]) {
+                el.textContent = translations[lang][key];
+              }
+              el.classList.remove('i18n-fading');
+            });
+          }, 150);
+        } else {
+          els.forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (translations[lang] && translations[lang][key]) {
+              el.textContent = translations[lang][key];
+            }
+          });
+        }
+      }
+
+      applyLanguage(currentLang, false);
+      langToggleBtn.addEventListener('click', () => {
+        applyLanguage(currentLang === 'id' ? 'en' : 'id', true);
+      });
+
+      /* ----------------------------------------------------------------------
+         2. TOAST HELPER (NO ALERT())
+         ---------------------------------------------------------------------- */
+      const toastBox = document.getElementById('toast-box');
+      const toastMessage = document.getElementById('toast-message');
+      let toastTimer = null;
+
+      function showToast(msg) {
+        toastMessage.textContent = msg;
+        toastBox.classList.add('show');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => {
+          toastBox.classList.remove('show');
+        }, 2800);
+      }
+
+      /* ----------------------------------------------------------------------
+         3. PROFILE PICTURE FALLBACK + LIVE UPLOAD WITH LOCALSTORAGE PERSISTENCE
+         ---------------------------------------------------------------------- */
+      const profileImg = document.getElementById('profile-img');
+      const avatarFallback = document.getElementById('avatar-fallback');
+      const avatarUploadTrigger = document.getElementById('avatar-upload-trigger');
+      const avatarHintBtn = document.getElementById('avatar-hint-btn');
+      const avatarFileInput = document.getElementById('avatar-file-input');
+      const AVATAR_STORAGE_KEY = 'watatsumi_profile_avatar_v1';
+
+      function showProfileImage() {
+        profileImg.classList.remove('hidden');
+        avatarFallback.classList.add('hidden');
+        avatarHintBtn.classList.add('hidden');
+      }
+
+      function showAvatarFallback() {
+        profileImg.classList.add('hidden');
+        avatarFallback.classList.remove('hidden');
+        avatarHintBtn.classList.remove('hidden');
+      }
+
+      // Check if user previously loaded a preview image into localStorage
+      let savedAvatar = null;
+      try {
+        savedAvatar = localStorage.getItem(AVATAR_STORAGE_KEY);
+      } catch (e) {}
+
+      profileImg.addEventListener('load', () => {
+        if (profileImg.naturalWidth > 0) {
+          showProfileImage();
+        } else {
+          showAvatarFallback();
+        }
+      });
+
+      profileImg.addEventListener('error', () => {
+        showAvatarFallback();
+      });
+
+      if (savedAvatar) {
+        profileImg.src = savedAvatar;
+      } else if (profileImg.complete) {
+        if (profileImg.naturalWidth > 0) {
+          showProfileImage();
+        } else {
+          showAvatarFallback();
+        }
+      }
+
+      function triggerFilePicker() {
+        avatarFileInput.click();
+      }
+
+      avatarUploadTrigger.addEventListener('click', triggerFilePicker);
+      avatarHintBtn.addEventListener('click', triggerFilePicker);
+
+      avatarFileInput.addEventListener('change', (e) => {
+        const file = e.target.files && e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = function (evt) {
+          const dataUrl = evt.target && evt.target.result;
+          if (typeof dataUrl === 'string') {
+            profileImg.src = dataUrl;
+            showProfileImage();
+            try {
+              localStorage.setItem(AVATAR_STORAGE_KEY, dataUrl);
+            } catch (err) {
+              // Ignore quota errors on very large images, still preview live
+            }
+            showToast(translations[currentLang]['toast.photoUpdated']);
+          }
+        };
+        reader.readAsDataURL(file);
+      });
+
+      /* ----------------------------------------------------------------------
+         4. FLOATING HEADER, MOBILE MENU & SECTION PROGRESS TRACKER
+         ---------------------------------------------------------------------- */
+      const floatingNav = document.getElementById('floating-nav');
+      const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+      const mobileDrawer = document.getElementById('mobile-drawer');
+      const hamburgerIcon = document.getElementById('hamburger-icon');
+      const closeIcon = document.getElementById('close-icon');
+
+      function setMobileMenu(open) {
+        mobileMenuBtn.setAttribute('aria-expanded', String(open));
+        mobileDrawer.classList.toggle('hidden', !open);
+        hamburgerIcon.classList.toggle('hidden', open);
+        closeIcon.classList.toggle('hidden', !open);
+      }
+
+      mobileMenuBtn.addEventListener('click', () => {
+        setMobileMenu(mobileDrawer.classList.contains('hidden'));
+      });
+
+      document.querySelectorAll('.mobile-nav-link').forEach(link => {
+        link.addEventListener('click', () => setMobileMenu(false));
+      });
+
+      window.addEventListener('scroll', () => {
+        floatingNav.classList.toggle('scrolled', window.scrollY > 28);
+      }, { passive: true });
+
+      const sectionIds = ['home', 'about', 'projects', 'contact'];
+      const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
+      const progressDots = document.querySelectorAll('.progress-dot-btn');
+      const desktopNavLinks = document.querySelectorAll('.nav-link');
+
+      progressDots.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const el = document.getElementById(btn.getAttribute('data-target'));
+          if (el) el.scrollIntoView({ behavior: 'smooth' });
+        });
+      });
+
+      const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            progressDots.forEach(dot => dot.classList.toggle('active', dot.getAttribute('data-target') === id));
+            desktopNavLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === `#${id}`));
+          }
+        });
+      }, { rootMargin: '-32% 0px -48% 0px', threshold: 0.05 });
+
+      sections.forEach(sec => sectionObserver.observe(sec));
+
+      // Scroll reveal for below-the-fold sections only
+      const revealEls = document.querySelectorAll('.reveal-section');
+      const revealObserver = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+
+      revealEls.forEach(el => revealObserver.observe(el));
+
+      /* ----------------------------------------------------------------------
+         5. PROJECT MODAL & EMAIL COPY
+         ---------------------------------------------------------------------- */
+      const modal = document.getElementById('project-modal');
+      const modalCategory = document.getElementById('modal-category');
+      const modalTitle = document.getElementById('modal-title');
+      const modalDesc = document.getElementById('modal-desc');
+      const modalHighlights = document.getElementById('modal-highlights');
+
+      function openProjectModal(key) {
+        const data = projectDetails[key];
+        if (!data) return;
+        const loc = data[currentLang] || data.id;
+        modalCategory.textContent = data.category;
+        modalTitle.textContent = data.title;
+        modalDesc.textContent = loc.desc;
+        modalHighlights.innerHTML = '';
+        loc.highlights.forEach(text => {
+          const li = document.createElement('li');
+          li.className = 'flex items-start gap-2.5';
+          li.innerHTML = `<span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-hydro shrink-0"></span><span>${text}</span>`;
+          modalHighlights.appendChild(li);
+        });
+        modal.classList.remove('modal-hidden');
+        modal.classList.add('modal-visible');
+      }
+
+      function closeProjectModal() {
+        modal.classList.remove('modal-visible');
+        modal.classList.add('modal-hidden');
+      }
+
+      document.querySelectorAll('[data-modal-project]').forEach(btn => {
+        btn.addEventListener('click', () => openProjectModal(btn.getAttribute('data-modal-project')));
+      });
+      document.getElementById('modal-close-btn').addEventListener('click', closeProjectModal);
+      document.getElementById('modal-close-secondary').addEventListener('click', closeProjectModal);
+      modal.addEventListener('click', (e) => { if (e.target === modal) closeProjectModal(); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeProjectModal(); });
+
+      document.getElementById('copy-email-btn').addEventListener('click', () => {
+        const emailText = 'hazwan.fahmi@email.com';
+        try {
+          const ta = document.createElement('textarea');
+          ta.value = emailText;
+          ta.setAttribute('readonly', '');
+          ta.style.position = 'fixed';
+          ta.style.opacity = '0';
+          document.body.appendChild(ta);
+          ta.select();
+          ta.setSelectionRange(0, 99999);
+          const ok = document.execCommand('copy');
+          document.body.removeChild(ta);
+          showToast(translations[currentLang][ok ? 'toast.copied' : 'toast.copyFail']);
+        } catch (err) {
+          showToast(translations[currentLang]['toast.copyFail']);
+        }
+      });
+
+      /* ----------------------------------------------------------------------
+         6. INTERACTIVE BUBBLE-CLICK EFFECT
+         ---------------------------------------------------------------------- */
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!prefersReducedMotion) {
+        document.addEventListener('click', (e) => {
+          const x = e.clientX;
+          const y = e.clientY;
+
+          const ripple = document.createElement('span');
+          ripple.className = 'hydro-ripple';
+          ripple.style.left = `${x}px`;
+          ripple.style.top = `${y}px`;
+          document.body.appendChild(ripple);
+          setTimeout(() => ripple.remove(), 680);
+
+          for (let i = 0; i < 6; i++) {
+            const b = document.createElement('span');
+            b.className = 'click-bubble';
+            const size = 5 + Math.random() * 8;
+            const angle = (Math.PI * 2 * i) / 6 + (Math.random() - 0.5) * 0.5;
+            const dist = 24 + Math.random() * 34;
+            b.style.width = `${size}px`;
+            b.style.height = `${size}px`;
+            b.style.left = `${x}px`;
+            b.style.top = `${y}px`;
+            b.style.setProperty('--tx', `${(Math.cos(angle) * dist).toFixed(1)}px`);
+            b.style.setProperty('--ty', `${(Math.sin(angle) * dist - 14).toFixed(1)}px`);
+            document.body.appendChild(b);
+            setTimeout(() => b.remove(), 880);
+          }
+        });
+      }
+
+      /* ----------------------------------------------------------------------
+         7. FULL-SCREEN 60FPS WATATSUMI CANVAS ENGINE
+            (Caustic Rays, 5 Glowing Bake-Kurage Jellyfish, Motes, Micro-Bubbles)
+         ---------------------------------------------------------------------- */
+      const canvas = document.getElementById('watatsumi-canvas');
+      const ctx = canvas.getContext('2d');
+      let width = 0, height = 0, dpr = 1;
+      let rays = [], bubbles = [], motes = [], jellies = [];
+
+      function resizeCanvas() {
+        width = window.innerWidth;
+        height = window.innerHeight;
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        canvas.width = Math.floor(width * dpr);
+        canvas.height = Math.floor(height * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        initScene();
+      }
+
+      function initScene() {
+        const rayCount = width < 640 ? 4 : 6;
+        rays = Array.from({ length: rayCount }, (_, i) => ({
+          x: (width / rayCount) * i + Math.random() * 100,
+          w: 75 + Math.random() * 120,
+          angle: 0.12 + Math.random() * 0.14,
+          speed: 0.0004 + Math.random() * 0.0004,
+          phase: Math.random() * Math.PI * 2,
+          alpha: 0.025 + Math.random() * 0.028
+        }));
+
+        const bubbleCount = width < 640 ? 22 : 38;
+        bubbles = Array.from({ length: bubbleCount }, () => ({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          r: 1.6 + Math.random() * 4,
+          vy: 0.25 + Math.random() * 0.52,
+          amp: 0.3 + Math.random() * 0.7,
+          phase: Math.random() * Math.PI * 2,
+          alpha: 0.18 + Math.random() * 0.34
+        }));
+
+        const moteColors = [
+          'rgba(100, 232, 255,',
+          'rgba(255, 183, 213,',
+          'rgba(255, 142, 196,',
+          'rgba(196, 181, 253,'
+        ];
+        const moteCount = width < 640 ? 26 : 48;
+        motes = Array.from({ length: moteCount }, () => ({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          r: 1.2 + Math.random() * 2.3,
+          vx: (Math.random() - 0.5) * 0.26,
+          vy: (Math.random() - 0.5) * 0.22,
+          color: moteColors[Math.floor(Math.random() * moteColors.length)],
+          pulse: 0.015 + Math.random() * 0.025,
+          phase: Math.random() * Math.PI * 2
+        }));
+
+        const jfCount = width < 768 ? 4 : 5;
+        const palettes = [
+          { core: 'rgba(100, 232, 255, 0.32)', rim: 'rgba(100, 232, 255, 0.65)', glow: 'rgba(100, 232, 255, 0.16)' },
+          { core: 'rgba(255, 183, 213, 0.30)', rim: 'rgba(255, 142, 196, 0.62)', glow: 'rgba(255, 142, 196, 0.15)' },
+          { core: 'rgba(196, 181, 253, 0.30)', rim: 'rgba(196, 181, 253, 0.62)', glow: 'rgba(196, 181, 253, 0.15)' }
+        ];
+        jellies = Array.from({ length: jfCount }, (_, idx) => ({
+          x: (width / (jfCount + 1)) * (idx + 1) + (Math.random() - 0.5) * 70,
+          y: height * (0.15 + Math.random() * 0.72),
+          size: (width < 640 ? 20 : 26) + Math.random() * 13,
+          vx: (Math.random() - 0.5) * 0.16,
+          vy: -0.13 - Math.random() * 0.15,
+          phase: Math.random() * Math.PI * 2,
+          pulseSpeed: 0.022 + Math.random() * 0.012,
+          pal: palettes[idx % palettes.length]
+        }));
+      }
+
+      function renderCanvas(time) {
+        ctx.clearRect(0, 0, width, height);
+
+        // 1. Caustic Light Rays
+        rays.forEach(r => {
+          const xTop = r.x + Math.sin(time * r.speed + r.phase) * 42;
+          const grad = ctx.createLinearGradient(xTop, 0, xTop + height * r.angle, height * 0.85);
+          grad.addColorStop(0, `rgba(100, 232, 255, ${r.alpha * 1.4})`);
+          grad.addColorStop(0.55, `rgba(196, 181, 253, ${r.alpha * 0.55})`);
+          grad.addColorStop(1, 'rgba(6, 13, 36, 0)');
+          ctx.fillStyle = grad;
+          ctx.beginPath();
+          ctx.moveTo(xTop - r.w * 0.35, 0);
+          ctx.lineTo(xTop + r.w * 0.35, 0);
+          ctx.lineTo(xTop + height * r.angle + r.w, height * 0.9);
+          ctx.lineTo(xTop + height * r.angle - r.w * 0.6, height * 0.9);
+          ctx.closePath();
+          ctx.fill();
+        });
+
+        // 2. Bioluminescent Motes
+        motes.forEach(m => {
+          m.x += m.vx;
+          m.y += m.vy;
+          if (m.x < -10) m.x = width + 10;
+          if (m.x > width + 10) m.x = -10;
+          if (m.y < -10) m.y = height + 10;
+          if (m.y > height + 10) m.y = -10;
+          const a = 0.25 + 0.55 * (0.5 + 0.5 * Math.sin(time * m.pulse * 0.06 + m.phase));
+          const rad = ctx.createRadialGradient(m.x, m.y, 0, m.x, m.y, m.r * 4);
+          rad.addColorStop(0, `${m.color} ${a})`);
+          rad.addColorStop(1, `${m.color} 0)`);
+          ctx.fillStyle = rad;
+          ctx.beginPath();
+          ctx.arc(m.x, m.y, m.r * 4, 0, Math.PI * 2);
+          ctx.fill();
+        });
+
+        // 3. Glowing Bake-Kurage Jellyfish
+        jellies.forEach(jf => {
+          const p = Math.sin(time * jf.pulseSpeed * 0.06 + jf.phase);
+          const sx = 1 + p * 0.08;
+          const sy = 1 - p * 0.07;
+
+          jf.x += jf.vx + Math.sin(time * 0.0006 + jf.phase) * 0.14;
+          jf.y += jf.vy - (p > 0 ? p * 0.14 : 0);
+
+          if (jf.y < -jf.size * 3.5) { jf.y = height + jf.size * 2.5; jf.x = Math.random() * width; }
+          if (jf.x < -jf.size * 2) jf.x = width + jf.size * 2;
+          if (jf.x > width + jf.size * 2) jf.x = -jf.size * 2;
+
+          ctx.save();
+          ctx.translate(jf.x, jf.y);
+
+          const halo = ctx.createRadialGradient(0, 0, 2, 0, 0, jf.size * 2.2);
+          halo.addColorStop(0, jf.pal.glow);
+          halo.addColorStop(1, 'rgba(6, 13, 36, 0)');
+          ctx.fillStyle = halo;
+          ctx.beginPath();
+          ctx.arc(0, 0, jf.size * 2.2, 0, Math.PI * 2);
+          ctx.fill();
+
+          // Tentacles
+          for (let t = 0; t < 5; t++) {
+            const ox = ((t / 4) - 0.5) * jf.size * 1.1;
+            const len = jf.size * (1.75 + (t % 2) * 0.5);
+            ctx.beginPath();
+            ctx.moveTo(ox * sx, jf.size * 0.12);
+            for (let s = 1; s <= 10; s++) {
+              const prog = s / 10;
+              const wave = Math.sin(time * 0.0028 + jf.phase + t * 0.9 + prog * 4.2) * (5 + prog * 8);
+              ctx.lineTo(ox * sx + wave, jf.size * 0.12 + prog * len);
+            }
+            ctx.strokeStyle = jf.pal.rim;
+            ctx.lineWidth = 1.2;
+            ctx.globalAlpha = 0.45;
+            ctx.stroke();
+          }
+
+          ctx.globalAlpha = 1;
+          ctx.scale(sx, sy);
+
+          const bellGrad = ctx.createRadialGradient(0, -jf.size * 0.3, 2, 0, 0, jf.size);
+          bellGrad.addColorStop(0, 'rgba(240, 248, 255, 0.55)');
+          bellGrad.addColorStop(0.55, jf.pal.core);
+          bellGrad.addColorStop(1, 'rgba(11, 22, 54, 0.12)');
+
+          ctx.beginPath();
+          ctx.arc(0, 0, jf.size * 0.85, Math.PI, 0, false);
+          ctx.quadraticCurveTo(jf.size * 0.85, jf.size * 0.24, jf.size * 0.42, jf.size * 0.18);
+          ctx.quadraticCurveTo(0, jf.size * 0.34, -jf.size * 0.42, jf.size * 0.18);
+          ctx.quadraticCurveTo(-jf.size * 0.85, jf.size * 0.24, -jf.size * 0.85, 0);
+          ctx.closePath();
+          ctx.fillStyle = bellGrad;
+          ctx.fill();
+          ctx.strokeStyle = jf.pal.rim;
+          ctx.lineWidth = 1.25;
+          ctx.stroke();
+
+          ctx.restore();
+        });
+
+        // 4. Rising Micro-Bubbles
+        bubbles.forEach(b => {
+          b.y -= b.vy;
+          b.x += Math.sin(time * 0.0015 + b.phase) * b.amp * 0.35;
+          if (b.y < -15) { b.y = height + 15; b.x = Math.random() * width; }
+          ctx.beginPath();
+          ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
+          ctx.strokeStyle = `rgba(100, 232, 255, ${b.alpha})`;
+          ctx.lineWidth = 1;
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.arc(b.x - b.r * 0.3, b.y - b.r * 0.3, Math.max(0.7, b.r * 0.26), 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(240, 248, 255, ${b.alpha + 0.25})`;
+          ctx.fill();
+        });
+
+        if (!prefersReducedMotion) {
+          requestAnimationFrame(renderCanvas);
+        }
+      }
+
+      window.addEventListener('resize', resizeCanvas);
+      window.onload = function () {
+        resizeCanvas();
+        if (prefersReducedMotion) {
+          renderCanvas(0);
+        } else {
+          requestAnimationFrame(renderCanvas);
+        }
+      };
+    })();
+  </script>
+</body>
+</html>
