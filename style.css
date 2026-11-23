@@ -1,0 +1,407 @@
+/* ==========================================================================
+   WATATSUMI ISLAND / SANGONOMIYA KOKOMI — THEME TOKENS & ATMOSPHERE
+   ========================================================================== */
+:root {
+  --abyss-deep: #060d24;
+  --abyss-mid: #0b1636;
+  --hydro: #64e8ff;
+  --coral: #ffb7d5;
+  --coral-deep: #ff8ec4;
+  --lavender: #c4b5fd;
+  --pearl: #f0f8ff;
+  --glass-bg: rgba(11, 22, 54, 0.54);
+  --glass-bg-hover: rgba(17, 34, 77, 0.68);
+  --glass-border: rgba(100, 232, 255, 0.2);
+  --glass-border-hover: rgba(255, 183, 213, 0.5);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background-color: var(--abyss-deep);
+  color: var(--pearl);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Deep Abyssal Indigo & Bioluminescent Backdrop */
+body {
+  background:
+    radial-gradient(ellipse 85% 45% at 50% -8%, rgba(100, 232, 255, 0.16), transparent 65%),
+    radial-gradient(ellipse 55% 45% at 88% 22%, rgba(255, 142, 196, 0.12), transparent 60%),
+    radial-gradient(ellipse 60% 45% at 12% 68%, rgba(196, 181, 253, 0.11), transparent 60%),
+    linear-gradient(180deg, #060d24 0%, #0b1636 42%, #102047 76%, #071029 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #060d24;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #64e8ff, #c4b5fd, #ff8ec4);
+  border-radius: 999px;
+}
+
+/* Full-Screen Canvas Layer */
+#watatsumi-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.content-layer {
+  position: relative;
+  z-index: 10;
+}
+
+/* Iridescent Gradient Text */
+.text-watatsumi {
+  background: linear-gradient(120deg, #f0f8ff 0%, #64e8ff 38%, #ffb7d5 72%, #c4b5fd 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glassmorphic Pearl Card */
+.pearl-glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  box-shadow:
+    0 12px 36px -10px rgba(4, 9, 26, 0.72),
+    inset 0 1px 0 rgba(240, 248, 255, 0.14);
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+              border-color 0.35s ease,
+              box-shadow 0.35s ease,
+              background-color 0.35s ease;
+}
+
+.pearl-glass:hover {
+  background: var(--glass-bg-hover);
+  border-color: var(--glass-border-hover);
+  box-shadow:
+    0 18px 46px -12px rgba(4, 9, 26, 0.85),
+    0 0 26px -6px rgba(100, 232, 255, 0.24),
+    0 0 18px -6px rgba(255, 142, 196, 0.2),
+    inset 0 1px 0 rgba(240, 248, 255, 0.22);
+}
+
+/* Floating Glassmorphic Header */
+.floating-header {
+  background: rgba(6, 13, 36, 0.68);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(100, 232, 255, 0.24);
+  box-shadow:
+    0 12px 30px rgba(3, 7, 22, 0.6),
+    inset 0 1px 0 rgba(240, 248, 255, 0.16);
+  transition: all 0.3s ease;
+}
+
+.floating-header.scrolled {
+  background: rgba(6, 13, 36, 0.86);
+  border-color: rgba(100, 232, 255, 0.36);
+  box-shadow:
+    0 16px 38px rgba(3, 7, 22, 0.78),
+    0 0 24px rgba(100, 232, 255, 0.14);
+}
+
+.nav-link {
+  position: relative;
+  color: rgba(240, 248, 255, 0.78);
+  transition: color 0.25s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: #f0f8ff;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #64e8ff, #ff8ec4);
+  border-radius: 999px;
+  transform: translateX(-50%);
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 72%;
+}
+
+/* Luminous Iridescent Pearl-Coral Avatar Halo (192px circle) */
+.avatar-halo-ring {
+  position: relative;
+  width: 196px;
+  height: 196px;
+  border-radius: 9999px;
+  padding: 5px;
+  background: conic-gradient(
+    from 0deg,
+    #64e8ff,
+    #c4b5fd,
+    #ffb7d5,
+    #ff8ec4,
+    #f0f8ff,
+    #64e8ff
+  );
+  box-shadow:
+    0 0 36px rgba(100, 232, 255, 0.34),
+    0 0 60px rgba(255, 142, 196, 0.22);
+  animation: haloSpin 14s linear infinite;
+}
+
+.avatar-inner-frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 9999px;
+  overflow: hidden;
+  background: radial-gradient(circle at 30% 25%, #162b5c 0%, #0b1636 60%, #060d24 100%);
+  border: 4px solid rgba(6, 13, 36, 0.92);
+  animation: haloSpinReverse 14s linear infinite;
+}
+
+@keyframes haloSpin {
+  to { transform: rotate(360deg); }
+}
+@keyframes haloSpinReverse {
+  to { transform: rotate(-360deg); }
+}
+
+/* Floating Hydro Pearl Orbs */
+.hydro-orb {
+  position: absolute;
+  border-radius: 9999px;
+  pointer-events: none;
+  animation: orbFloat 5s ease-in-out infinite;
+}
+
+@keyframes orbFloat {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-10px) scale(1.08); }
+}
+
+/* Primary & Outline Hydro Buttons */
+.btn-hydro {
+  background: linear-gradient(135deg, rgba(100, 232, 255, 0.24), rgba(196, 181, 253, 0.24), rgba(255, 142, 196, 0.26));
+  border: 1px solid rgba(100, 232, 255, 0.5);
+  color: #f0f8ff;
+  box-shadow: 0 8px 26px -6px rgba(100, 232, 255, 0.38);
+  transition: all 0.28s ease;
+}
+
+.btn-hydro:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 183, 213, 0.8);
+  box-shadow: 0 12px 32px -6px rgba(100, 232, 255, 0.52), 0 0 22px rgba(255, 142, 196, 0.3);
+}
+
+.btn-pearl-outline {
+  background: rgba(11, 22, 54, 0.55);
+  border: 1px solid rgba(240, 248, 255, 0.25);
+  color: #f0f8ff;
+  transition: all 0.28s ease;
+}
+
+.btn-pearl-outline:hover {
+  transform: translateY(-2px);
+  background: rgba(17, 34, 77, 0.72);
+  border-color: rgba(100, 232, 255, 0.55);
+}
+
+/* Right-Side Fixed Vertical Section Progress Tracker (Desktop) */
+.section-progress {
+  position: fixed;
+  right: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 40;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+@media (min-width: 1024px) {
+  .section-progress {
+    display: flex;
+  }
+}
+
+.progress-track-line {
+  position: absolute;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: linear-gradient(180deg, rgba(100, 232, 255, 0.2), rgba(196, 181, 253, 0.4), rgba(255, 142, 196, 0.25));
+  border-radius: 999px;
+  z-index: -1;
+}
+
+.progress-dot-btn {
+  position: relative;
+  width: 14px;
+  height: 14px;
+  border-radius: 9999px;
+  background: rgba(6, 13, 36, 0.88);
+  border: 2px solid rgba(100, 232, 255, 0.48);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  padding: 0;
+}
+
+.progress-dot-btn:hover {
+  transform: scale(1.25);
+  border-color: #ffb7d5;
+}
+
+.progress-dot-btn.active {
+  background: radial-gradient(circle at 35% 35%, #ffffff, #64e8ff 58%, #ff8ec4);
+  border-color: #f0f8ff;
+  transform: scale(1.38);
+  box-shadow: 0 0 14px rgba(100, 232, 255, 0.9), 0 0 24px rgba(255, 142, 196, 0.5);
+}
+
+.progress-tooltip {
+  position: absolute;
+  right: 26px;
+  top: 50%;
+  transform: translateY(-50%) translateX(6px);
+  opacity: 0;
+  pointer-events: none;
+  white-space: nowrap;
+  padding: 4px 11px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: #f0f8ff;
+  background: rgba(6, 13, 36, 0.92);
+  border: 1px solid rgba(100, 232, 255, 0.32);
+  backdrop-filter: blur(8px);
+  transition: all 0.25s ease;
+}
+
+.progress-dot-btn:hover .progress-tooltip {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+/* Scroll Reveal for Below-the-Fold Sections ONLY (Hero is always immediately visible) */
+.reveal-section {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Smooth Language Switch Fade */
+.i18n-fade {
+  transition: opacity 0.2s ease;
+}
+.i18n-fading {
+  opacity: 0 !important;
+}
+
+/* Bubble-Click Burst Particles & Ripple */
+.hydro-ripple {
+  position: fixed;
+  border-radius: 9999px;
+  pointer-events: none;
+  z-index: 9998;
+  border: 1.5px solid rgba(100, 232, 255, 0.78);
+  box-shadow: 0 0 12px rgba(100, 232, 255, 0.5);
+  transform: translate(-50%, -50%) scale(0.2);
+  animation: rippleExpand 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes rippleExpand {
+  0% { width: 12px; height: 12px; opacity: 0.9; transform: translate(-50%, -50%) scale(0.4); }
+  100% { width: 74px; height: 74px; opacity: 0; transform: translate(-50%, -50%) scale(1.25); }
+}
+
+.click-bubble {
+  position: fixed;
+  border-radius: 9999px;
+  pointer-events: none;
+  z-index: 9999;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.95), rgba(100, 232, 255, 0.48) 55%, rgba(255, 142, 196, 0.3) 100%);
+  border: 1px solid rgba(240, 248, 255, 0.7);
+  box-shadow: 0 0 8px rgba(100, 232, 255, 0.52);
+  animation: bubbleBurst 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes bubbleBurst {
+  0% { opacity: 0.95; transform: translate(-50%, -50%) translate(0, 0) scale(0.5); }
+  70% { opacity: 0.85; }
+  100% { opacity: 0; transform: translate(-50%, -50%) translate(var(--tx), var(--ty)) scale(1.15); }
+}
+
+/* Toast Notification */
+#toast-box {
+  position: fixed;
+  bottom: 1.75rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 100;
+  transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+#toast-box.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Project Detail Modal */
+#project-modal {
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+#project-modal.modal-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+#project-modal.modal-visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .avatar-halo-ring, .avatar-inner-frame, .hydro-orb {
+    animation: none !important;
+  }
+  .reveal-section {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  html { scroll-behavior: auto; }
+}
