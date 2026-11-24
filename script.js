@@ -48,7 +48,7 @@
       'modal.close': 'Tutup',
       'toast.copied': 'Email berhasil disalin ke clipboard!',
       'toast.copyFail': 'Gagal menyalin email, silakan salin secara manual.',
-'
+
     },
     en: {
       'nav.home': 'Home',
